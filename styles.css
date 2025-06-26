@@ -233,87 +233,6 @@ body {
     color: #6b7280;
 }
 
-/* About Section */
-.about {
-    padding: 100px 0;
-    background: #f9fafb;
-}
-
-.about-content {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 60px;
-    align-items: start;
-}
-
-.about-text h3 {
-    font-size: 1.875rem;
-    font-weight: 600;
-    color: #1f2937;
-    margin-bottom: 24px;
-}
-
-.about-text p {
-    font-size: 1.125rem;
-    color: #4b5563;
-    margin-bottom: 40px;
-}
-
-.stats {
-    display: flex;
-    gap: 40px;
-}
-
-.stat {
-    text-align: center;
-}
-
-.stat h4 {
-    font-size: 2.5rem;
-    font-weight: 700;
-    color: #2563eb;
-    margin-bottom: 8px;
-}
-
-.stat p {
-    color: #6b7280;
-    font-weight: 500;
-}
-
-.about-values {
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
-}
-
-.value-card {
-    background: white;
-    padding: 30px;
-    border-radius: 12px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-    transition: transform 0.3s ease;
-}
-
-.value-card:hover {
-    transform: translateY(-5px);
-}
-
-.value-card i {
-    font-size: 2.5rem;
-    color: #2563eb;
-    margin-bottom: 16px;
-}
-
-.value-card h4 {
-    font-size: 1.25rem;
-    font-weight: 600;
-    color: #1f2937;
-    margin-bottom: 12px;
-}
-
-.value-card p {
-    color: #6b7280;
-}
 
 /* Services Section */
 .services {
@@ -322,8 +241,11 @@ body {
 
 .services-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(2, minmax(280px, 1fr));
     gap: 30px;
+    max-width: 800px;
+    margin: 0 auto;
+    justify-content: center;
 }
 
 .service-card {
@@ -394,9 +316,9 @@ body {
 }
 
 .contact-content {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 60px;
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
 }
 
 .contact-info h3 {
@@ -415,6 +337,7 @@ body {
 .contact-item {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 16px;
     margin-bottom: 24px;
 }
@@ -438,6 +361,7 @@ body {
 
 .social-links {
     display: flex;
+    justify-content: center;
     gap: 16px;
     margin-top: 32px;
 }
@@ -460,39 +384,7 @@ body {
     transform: translateY(-2px);
 }
 
-.contact-form {
-    background: white;
-    padding: 40px;
-    border-radius: 12px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-}
 
-.form-group {
-    margin-bottom: 24px;
-}
-
-.form-group input,
-.form-group select,
-.form-group textarea {
-    width: 100%;
-    padding: 14px 16px;
-    border: 2px solid #e5e7eb;
-    border-radius: 8px;
-    font-size: 16px;
-    transition: border-color 0.3s ease;
-}
-
-.form-group input:focus,
-.form-group select:focus,
-.form-group textarea:focus {
-    outline: none;
-    border-color: #2563eb;
-}
-
-.form-group textarea {
-    resize: vertical;
-    min-height: 120px;
-}
 
 /* Footer */
 .footer {
@@ -578,20 +470,9 @@ body {
         flex-direction: column;
         align-items: center;
     }
-    
-    .about-content {
-        grid-template-columns: 1fr;
-    }
-    
-    .stats {
-        justify-content: center;
-    }
+
     
     .services-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .contact-content {
         grid-template-columns: 1fr;
     }
     
@@ -638,13 +519,5 @@ body {
         padding: 12px 24px;
         font-size: 14px;
     }
-    
-    .stats {
-        flex-direction: column;
-        gap: 20px;
-    }
-    
-    .contact-form {
-        padding: 24px;
-    }
+
 }
