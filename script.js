@@ -6,6 +6,13 @@ navToggle.addEventListener('click', () => {
     navMenu.classList.toggle('active');
 });
 
+// Close mobile menu when clicking on a link
+document.querySelectorAll('.nav-link').forEach(link => {
+    link.addEventListener('click', () => {
+        navMenu.classList.remove('active');
+    });
+});
+
 // Smooth scrolling for navigation links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
@@ -60,36 +67,3 @@ document.addEventListener('DOMContentLoaded', () => {
         observer.observe(element);
     });
 });
-
-
-
-// Add mobile menu styles
-const mobileMenuStyles = `
-    @media (max-width: 768px) {
-        .nav-menu {
-            position: fixed;
-            top: 70px;
-            right: -100%;
-            width: 100%;
-            background: white;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-            transition: right 0.3s ease;
-            flex-direction: column;
-            padding: 20px;
-            gap: 16px;
-        }
-        
-        .nav-menu.active {
-            right: 0;
-        }
-        
-        .nav-link {
-            padding: 12px 0;
-            border-bottom: 1px solid #f3f4f6;
-        }
-    }
-`;
-
-const mobileStyleSheet = document.createElement('style');
-mobileStyleSheet.textContent = mobileMenuStyles;
-document.head.appendChild(mobileStyleSheet);
