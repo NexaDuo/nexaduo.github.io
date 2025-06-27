@@ -6,15 +6,172 @@
     <title>NexaDuo - Soluções Tecnológicas Inovadoras</title>
     <meta name="description" content="NexaDuo - Empresa especializada em desenvolvimento de software, consultoria tecnológica e soluções digitais inovadoras.">
     <meta name="keywords" content="desenvolvimento, software, tecnologia, consultoria, soluções digitais">
-    <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Preconnect to Google Fonts and Font Awesome CDN -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    
+    <!-- Critical CSS -->
+    <style>
+      /* Critical CSS for above-the-fold content */
+      * {margin: 0; padding: 0; box-sizing: border-box;}
+      html {scroll-behavior: smooth;}
+      body {
+        font-family: sans-serif; /* Fallback until custom fonts load */
+        line-height: 1.6;
+        color: #e5e7eb;
+        background: #0d1928;
+        overflow-x: hidden;
+      }
+      .container {max-width: 1200px; margin: 0 auto; padding: 0 20px;}
+      
+      /* Critical header styles */
+      .header {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        background: rgba(13, 25, 40, 0.95);
+        backdrop-filter: blur(10px);
+        z-index: 1000;
+        transition: all 0.3s ease;
+        border-bottom: 1px solid rgba(59, 130, 246, 0.2);
+      }
+      .nav-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 70px;
+      }
+      .nav-logo {display: flex; align-items: center; gap: 12px;}
+      .logo-img {height: 40px; width: auto;}
+      .logo-text {font-size: 24px; font-weight: 700; color: #3b82f6;}
+      .nav-menu {display: flex; list-style: none; gap: 32px;}
+      .nav-link {
+        text-decoration: none;
+        color: #cbd5e1;
+        font-weight: 500;
+        transition: color 0.3s ease;
+        position: relative;
+      }
+      .nav-link:hover {color: #3b82f6;}
+      .nav-toggle {display: none; font-size: 24px; cursor: pointer; color: #cbd5e1;}
+      
+      /* Critical hero section styles */
+      .hero {
+        padding: 120px 0 80px;
+        background: linear-gradient(135deg, #0d1928 0%, #1e293b 50%, #3b82f6 100%);
+        color: white;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+      }
+      .hero-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 60px;
+        align-items: center;
+      }
+      .hero-title {
+        font-size: 3.5rem;
+        font-weight: 700;
+        line-height: 1.2;
+        margin-bottom: 24px;
+      }
+      .highlight {
+        background: linear-gradient(45deg, #fbbf24, #f59e0b);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+      .hero-description {font-size: 1.25rem; margin-bottom: 32px; opacity: 0.9;}
+      .hero-buttons {display: flex; gap: 16px;}
+      .btn {
+        padding: 14px 28px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        border: none;
+        cursor: pointer;
+        font-size: 16px;
+      }
+      .btn-primary {background: #fbbf24; color: #1f2937;}
+      .btn-primary:hover {background: #f59e0b; transform: translateY(-2px);}
+      .btn-secondary {
+        background: transparent;
+        color: white;
+        border: 2px solid rgba(255, 255, 255, 0.8);
+      }
+      .hero-graphic {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 30px;
+        flex-wrap: wrap;
+      }
+      .hero-graphic i {
+        font-size: 4rem;
+        color: rgba(255, 255, 255, 0.8);
+        animation: float 3s ease-in-out infinite;
+      }
+      @keyframes float {
+        0%, 100% {transform: translateY(0px);}
+        50% {transform: translateY(-20px);}
+      }
+      
+      /* Mobile responsiveness for critical elements */
+      @media (max-width: 768px) {
+        .nav-menu {
+          position: fixed;
+          top: 70px;
+          right: -100%;
+          width: 100%;
+          background: #1e293b;
+          transition: right 0.3s ease;
+          flex-direction: column;
+          padding: 20px;
+          gap: 16px;
+          z-index: 999;
+        }
+        .nav-menu.active {right: 0;}
+        .nav-toggle {display: block;}
+        .hero-container {grid-template-columns: 1fr; text-align: center;}
+        .hero-title {font-size: 2.5rem;}
+        .hero-buttons {justify-content: center;}
+      }
+    </style>
 
+    <!-- Favicon -->
     <link rel="icon" type="image/png" href="/assets/favicon/favicon-96x96.png" sizes="96x96" />
     <link rel="icon" type="image/svg+xml" href="/assets/favicon/favicon.svg" />
     <link rel="shortcut icon" href="/assets/favicon/favicon.ico" />
     <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png" />
     <link rel="manifest" href="/assets/favicon/site.webmanifest" />
+    
+    <!-- Non-critical CSS loaded asynchronously -->
+    <link rel="preload" href="styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="styles.css"></noscript>
+    
+    <!-- Font Awesome loaded asynchronously -->
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
+    
+    <!-- Google Fonts with font-display:swap for better performance -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap&display=swap" rel="stylesheet"></noscript>
+    
+    <!-- Fallback script for browsers that don't support preload -->
+    <script>
+      // Preload polyfill
+      !function(n){"use strict";n.loadCSS||(n.loadCSS=function(){});var t=loadCSS.relpreload={};if(t.support=function(){var e;try{e=n.document.createElement("link").relList.supports("preload")}catch(t){e=!1}return function(){return e}}(),t.bindMediaToggle=function(t){var e=t.media||"all";function a(){t.media=e}t.addEventListener?t.addEventListener("load",a):t.attachEvent&&t.attachEvent("onload",a),setTimeout(function(){t.rel="stylesheet",t.media="only x"}),setTimeout(a,3e3)},t.poly=function(){if(!t.support())for(var e=n.document.getElementsByTagName("link"),a=0;a<e.length;a++){var o=e[a];"preload"!==o.rel||"style"!==o.getAttribute("as")||o.getAttribute("data-loadcss")||(o.setAttribute("data-loadcss",!0),t.bindMediaToggle(o))}},!t.support()){t.poly();var e=n.setInterval(t.poly,500);n.addEventListener?n.addEventListener("load",function(){t.poly(),n.clearInterval(e)}):n.attachEvent&&n.attachEvent("onload",function(){t.poly(),n.clearInterval(e)})}"undefined"!=typeof exports?exports.loadCSS=loadCSS:n.loadCSS=loadCSS}("undefined"!=typeof global?global:this);
+    </script>
 </head>
 <body>
     <!-- Header -->
@@ -22,7 +179,10 @@
         <nav class="nav">
             <div class="nav-container">
                 <div class="nav-logo">
-                    <img src="assets/logo.png" alt="NexaDuo Logo" class="logo-img">
+                    <picture>
+                        <source srcset="assets/logo-40.webp" type="image/webp">
+                        <img src="assets/logo.png" alt="NexaDuo Logo" class="logo-img" height="40">
+                    </picture>
                     <span class="logo-text">NexaDuo</span>
                 </div>
                 <ul class="nav-menu">
@@ -135,7 +295,10 @@
                     <div class="contact-boxes">
                         <div class="contact-persons-box">
                             <div class="contact-person">
-                                <img src="assets/alexandre.jpeg" alt="Alexandre Machado" class="contact-photo rounded">
+                                <picture>
+                                    <source srcset="assets/alexandre-64.webp" type="image/webp">
+                                    <img src="assets/alexandre.jpeg" alt="Alexandre Machado" class="contact-photo rounded" width="64" height="64">
+                                </picture>
                                 <div class="contact-person-details">
                                     <h4>Alexandre Machado</h4>
                                     <p><i class="fas fa-phone"></i> +55 (51) 981 508 375</p>
@@ -143,7 +306,10 @@
                                 </div>
                             </div>
                             <div class="contact-person">
-                                <img src="assets/sheyla.jpeg" alt="Sheyla Paladini" class="contact-photo rounded">
+                                <picture>
+                                    <source srcset="assets/sheyla-64.webp" type="image/webp">
+                                    <img src="assets/sheyla.jpeg" alt="Sheyla Paladini" class="contact-photo rounded" width="64" height="64">
+                                </picture>
                                 <div class="contact-person-details">
                                     <h4>Sheyla Paladini</h4>
                                     <p><i class="fas fa-phone"></i> +55 (51) 992 654 423</p>
@@ -182,7 +348,10 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-brand">
-                    <img src="assets/NexaDuo.png" alt="NexaDuo Logo" class="footer-logo">
+                    <picture>
+                        <source srcset="assets/NexaDuo-40.webp" type="image/webp">
+                        <img src="assets/NexaDuo.png" alt="NexaDuo Logo" class="footer-logo" height="40">
+                    </picture>
                     <p>Transformando ideias em soluções tecnológicas inovadoras.</p>
                 </div>
                 <div class="footer-links">
@@ -215,6 +384,6 @@
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script src="script.min.js" defer></script>
 </body>
 </html>
