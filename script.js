@@ -31,7 +31,7 @@ function setupNavigation() {
     
     // Handle smooth scrolling
     const targetId = link.getAttribute('href');
-    if (targetId?.startsWith('#')) {
+    if (targetId?.startsWith('#') && targetId.length > 1) {
       e.preventDefault();
       const target = document.querySelector(targetId);
       target?.scrollIntoView({behavior: 'smooth', block: 'start'});
@@ -43,8 +43,11 @@ function setupNavigation() {
     const anchor = e.target.closest('a[href^="#"]:not(.nav-link)');
     if (!anchor) return;
     
+    const href = anchor.getAttribute('href');
+    if (href === '#' || href.length <= 1) return; // Skip empty or invalid anchors
+    
     e.preventDefault();
-    const target = document.querySelector(anchor.getAttribute('href'));
+    const target = document.querySelector(href);
     target?.scrollIntoView({behavior: 'smooth', block: 'start'});
   });
 }
