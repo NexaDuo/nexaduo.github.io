@@ -446,11 +446,33 @@ img[width][height] {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  text-decoration: none;
 }
 
 .social-links .social-link:hover {
   background: #3b82f6;
   color: #fff;
+}
+
+/* Removendo sublinhado de todos os links da seção de contato */
+.contact-content a {
+  text-decoration: none;
+}
+
+.contact-person-details a {
+  text-decoration: none;
+}
+
+/* Garantindo que ícones não apareçam com sublinhado */
+.contact-info i {
+  text-decoration: none;
+  margin-right: 8px;
+}
+
+.contact-person-details p i {
+  display: inline-block;
+  width: 20px;
+  text-align: center;
 }
 
 @media (max-width: 900px) {
