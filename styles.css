@@ -427,6 +427,11 @@ img[width][height] {
 .contact-item i {
   color: #3b82f6;
   font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.8rem;
+  text-align: center;
 }
 
 .social-links {
@@ -437,7 +442,6 @@ img[width][height] {
   color: #3b82f6;
   background: #1e293b;
   border-radius: 50%;
-  padding: 0.5rem;
   margin-right: 0.5rem;
   transition: background 0.2s, color 0.2s;
   font-size: 1.2rem;
@@ -447,11 +451,23 @@ img[width][height] {
   align-items: center;
   justify-content: center;
   text-decoration: none;
+  /* Improved centering */
+  position: relative;
+  line-height: 1;
+  padding: 0;
 }
 
 .social-links .social-link:hover {
   background: #3b82f6;
   color: #fff;
+}
+
+.social-links .social-link i {
+  /* Properly center the icon within the container */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 /* Removendo sublinhado de todos os links da seção de contato */
@@ -470,9 +486,13 @@ img[width][height] {
 }
 
 .contact-person-details p i {
-  display: inline-block;
+  display: inline-flex;
   width: 20px;
   text-align: center;
+  align-items: center;
+  justify-content: center;
+  height: 20px;
+  position: relative;
 }
 
 @media (max-width: 900px) {
