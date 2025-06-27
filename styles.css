@@ -401,6 +401,8 @@ img[width][height] {
   border: 2px solid #3b82f6;
   box-shadow: 0 1px 4px rgba(59,130,246,0.10);
   background: #0d1928;
+  flex-shrink: 0; /* Evita que a imagem seja comprimida */
+  aspect-ratio: 1; /* Garante proporção 1:1 */
 }
 
 .contact-details-box {
@@ -513,6 +515,13 @@ img[width][height] {
   .contact-person {
     flex-direction: row;
     width: 100%;
+  }
+  
+  .contact-photo.rounded {
+    width: 56px;
+    height: 56px;
+    min-width: 56px; /* Garante tamanho mínimo */
+    min-height: 56px;
   }
 }
 
@@ -711,5 +720,24 @@ img[width][height] {
         padding: 12px 24px;
         font-size: 14px;
     }
-
+    
+    .contact-photo.rounded {
+        width: 48px;
+        height: 48px;
+        min-width: 48px;
+        min-height: 48px;
+    }
+    
+    .contact-person {
+        padding: 1rem;
+        gap: 1rem;
+    }
+    
+    .contact-person-details h4 {
+        font-size: 1rem;
+    }
+    
+    .contact-person-details p {
+        font-size: 0.9rem;
+    }
 }
