@@ -23,6 +23,16 @@ body {
     padding: 0 20px;
 }
 
+/* Ensuring images don't cause layout shifts */
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+img[width][height] {
+    aspect-ratio: attr(width) / attr(height);
+}
+
 /* Header */
 .header {
     position: fixed;
@@ -58,7 +68,8 @@ body {
 
 .logo-img {
     height: 40px;
-    width: auto;
+    width: 40px;
+    object-fit: contain;
 }
 
 .logo-text {
@@ -540,6 +551,12 @@ body {
 
 .footer-social .social-links a i {
     font-size: 1.2em;
+}
+
+.footer-logo {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
 }
 
 .footer-bottom {
