@@ -21,6 +21,10 @@
     --shadow-brand: 0 20px 40px rgba(59, 130, 246, 0.25);
     --radius-sm: 8px;
     --radius-md: 12px;
+    /* Typography Scale */
+    --fs-base: 17px;
+    --fs-h1: clamp(2.4rem, 3.5vw + 1rem, 3.5rem);
+    --fs-h2: clamp(1.75rem, 2.5vw + 0.6rem, 2.5rem);
 }
 
 html {
@@ -29,10 +33,11 @@ html {
 
 body {
     font-family: 'Inter', sans-serif;
-    line-height: 1.6;
+    line-height: 1.65;
     color: var(--color-text);
     background: var(--color-bg);
     overflow-x: hidden;
+    font-size: var(--fs-base);
 }
 
 .container {
@@ -145,6 +150,17 @@ img[width][height] {
     min-height: 100vh;
     display: flex;
     align-items: center;
+    position: relative;
+}
+.hero::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 120px;
+    pointer-events: none;
+    background: linear-gradient(to bottom, rgba(13,25,40,0) 0%, rgba(13,25,40,0.55) 60%, rgba(13,25,40,1) 100%);
 }
 
 .hero-container {
@@ -158,7 +174,7 @@ img[width][height] {
 }
 
 .hero-title {
-    font-size: 3.5rem;
+    font-size: var(--fs-h1);
     font-weight: 700;
     line-height: 1.2;
     margin-bottom: 24px;
@@ -264,7 +280,7 @@ img[width][height] {
 }
 
 .section-title {
-    font-size: 2.5rem;
+    font-size: var(--fs-h2);
     font-weight: 700;
     color: #f1f5f9;
     margin-bottom: 16px;
