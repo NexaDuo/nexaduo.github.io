@@ -228,8 +228,8 @@ img[width][height] {
 }
 
 .hero-graphic i {
-    font-size: 4rem;
-    color: rgba(255, 255, 255, 0.8);
+    font-size: 3.5rem;
+    color: rgba(255, 255, 255, 0.75);
     animation: float 3s ease-in-out infinite;
 }
 
@@ -253,7 +253,7 @@ img[width][height] {
     }
 
     50% {
-        transform: translateY(-20px);
+        transform: translateY(-14px);
     }
 }
 
