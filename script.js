@@ -1,123 +1,110 @@
 /**
- * NexaDuo Website JavaScript - Optimized for performance
+ * NexaDuo Website - JavaScript
  */
 
-// Main initialization function
 function initApp() {
-  // Use event delegation to handle all nav-related events
-  setupNavigation();
-  
-  // Lazy load scroll effects with throttling
-  setupScrollEffects();
-  
-  // Setup animations with IntersectionObserver
-  setupAnimations();
+    setupNavigation();
+    setupScrollEffects();
+    setupRevealAnimations();
 }
 
-// Setup navigation functionality with event delegation
 function setupNavigation() {
-  // Mobile Nav Toggle using single event listener
-  document.querySelector('.nav-toggle')?.addEventListener('click', () => {
-    document.querySelector('.nav-menu')?.classList.toggle('active');
-  });
-  
-  // Event delegation for nav links (one listener instead of many)
-  document.querySelector('.nav-menu')?.addEventListener('click', (e) => {
-    const link = e.target.closest('.nav-link');
-    if (!link) return;
-    
-    // Close mobile menu
-    document.querySelector('.nav-menu')?.classList.remove('active');
-    
-    // Handle smooth scrolling
-    const targetId = link.getAttribute('href');
-    if (targetId?.startsWith('#') && targetId.length > 1) {
-      e.preventDefault();
-      const target = document.querySelector(targetId);
-      target?.scrollIntoView({behavior: 'smooth', block: 'start'});
+    const toggle = document.querySelector('.nav-toggle');
+    const menu = document.querySelector('.nav-menu');
+
+    if (!toggle || !menu) return;
+
+    toggle.addEventListener('click', () => {
+        const isOpen = menu.classList.toggle('active');
+        toggle.setAttribute('aria-expanded', isOpen);
+        toggle.querySelector('i').className = isOpen ? 'fas fa-xmark' : 'fas fa-bars';
+        document.body.classList.toggle('menu-open', isOpen);
+    });
+
+    function closeMenu() {
+        menu.classList.remove('active');
+        toggle.setAttribute('aria-expanded', 'false');
+        toggle.querySelector('i').className = 'fas fa-bars';
+        document.body.classList.remove('menu-open');
     }
-  });
-  
-  // Handle other anchor links that might not be in the nav menu
-  document.addEventListener('click', (e) => {
-    const anchor = e.target.closest('a[href^="#"]:not(.nav-link)');
-    if (!anchor) return;
-    
-    const href = anchor.getAttribute('href');
-    if (href === '#' || href.length <= 1) return; // Skip empty or invalid anchors
-    
-    e.preventDefault();
-    const target = document.querySelector(href);
-    target?.scrollIntoView({behavior: 'smooth', block: 'start'});
-  });
+
+    menu.addEventListener('click', (e) => {
+        const link = e.target.closest('.nav-link');
+        if (!link) return;
+
+        closeMenu();
+
+        const targetId = link.getAttribute('href');
+        if (targetId?.startsWith('#') && targetId.length > 1) {
+            e.preventDefault();
+            document.querySelector(targetId)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            history.replaceState(null, '', window.location.pathname);
+        }
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && menu.classList.contains('active')) {
+            closeMenu();
+            toggle.focus();
+        }
+    });
+
+    document.addEventListener('click', (e) => {
+        const anchor = e.target.closest('a[href^="#"]:not(.nav-link)');
+        if (!anchor) return;
+
+        const href = anchor.getAttribute('href');
+        if (!href || href === '#' || href.length <= 1) return;
+
+        e.preventDefault();
+        document.querySelector(href)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        history.replaceState(null, '', window.location.pathname);
+    });
 }
 
-// Setup scroll effects with throttling to improve performance
 function setupScrollEffects() {
-  const header = document.querySelector('.header');
-  let lastScrollPosition = 0;
-  let ticking = false;
-  
-  // Throttle scroll events to improve performance
-  window.addEventListener('scroll', () => {
-    lastScrollPosition = window.scrollY;
-    
-    if (!ticking) {
-      window.requestAnimationFrame(() => {
-        updateHeaderOnScroll(lastScrollPosition);
-        ticking = false;
-      });
-      ticking = true;
-    }
-  }, {passive: true}); // Using passive listener for better scrolling performance
-  
-  function updateHeaderOnScroll(scrollY) {
+    const header = document.querySelector('.header');
     if (!header) return;
-    
-    if (scrollY > 100) {
-      header.classList.add('header-scrolled');
-    } else {
-      header.classList.remove('header-scrolled');
-    }
-  }
+
+    let ticking = false;
+
+    window.addEventListener('scroll', () => {
+        if (!ticking) {
+            requestAnimationFrame(() => {
+                header.classList.toggle('header-scrolled', window.scrollY > 50);
+                ticking = false;
+            });
+            ticking = true;
+        }
+    }, { passive: true });
 }
 
-// Setup animations using IntersectionObserver
-function setupAnimations() {
-  // Only setup animations after critical content is loaded
-  if ('requestIdleCallback' in window) {
-    window.requestIdleCallback(setupObserver);
-  } else {
-    // Fallback for browsers that don't support requestIdleCallback
-    setTimeout(setupObserver, 200);
-  }
-  
-  function setupObserver() {
+function setupRevealAnimations() {
     const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('animated');
-            // Stop observing once animated
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-      }
+        (entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        },
+        { threshold: 0.1, rootMargin: '0px 0px -60px 0px' }
     );
-    
-    // Observe service cards
-    document.querySelectorAll('.service-card').forEach(el => observer.observe(el));
-  }
+
+    if ('requestIdleCallback' in window) {
+        requestIdleCallback(() => {
+            document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+        });
+    } else {
+        setTimeout(() => {
+            document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+        }, 200);
+    }
 }
 
-// Initialize when DOM is fully loaded
 if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', initApp);
+    document.addEventListener('DOMContentLoaded', initApp);
 } else {
-  // DOM is already loaded, initialize immediately
-  initApp();
+    initApp();
 }

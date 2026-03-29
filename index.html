@@ -7,17 +7,40 @@
     <title>NexaDuo - Soluções Tecnológicas Inovadoras</title>
     <meta name="description"
         content="NexaDuo - Empresa especializada em desenvolvimento de software, consultoria tecnológica e soluções digitais inovadoras.">
-    <meta name="keywords" content="desenvolvimento, software, tecnologia, consultoria, soluções digitais">
+    <meta name="keywords" content="desenvolvimento, software, tecnologia, consultoria, soluções digitais, NexaDuo">
 
-    <!-- Preconnect to Google Fonts and Font Awesome CDN -->
+    <meta property="og:title" content="NexaDuo - Soluções Tecnológicas Inovadoras">
+    <meta property="og:description"
+        content="Desenvolvemos software personalizado e oferecemos consultoria tecnológica para impulsionar o crescimento do seu negócio.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://nexaduo.com">
+
+    <!-- Preconnect -->
     <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
 
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/assets/favicon/favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/svg+xml" href="/assets/favicon/favicon.svg">
+    <link rel="shortcut icon" href="/assets/favicon/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png">
+    <link rel="manifest" href="/assets/favicon/site.webmanifest">
+
     <!-- Critical CSS -->
     <style>
-        /* Critical CSS for above-the-fold content */
-        * {
+        @font-face {
+            font-family: 'Inter Fallback';
+            src: local('Arial');
+            size-adjust: 107%;
+            ascent-override: 90%;
+            descent-override: 22%;
+            line-gap-override: 0%;
+        }
+
+        *,
+        *::before,
+        *::after {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
@@ -28,493 +51,586 @@
         }
 
         body {
-            font-family: sans-serif;
-            /* Fallback until custom fonts load */
+            font-family: 'Inter', 'Inter Fallback', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            color: #e2e8f0;
+            background: #030712;
             line-height: 1.6;
-            color: #e5e7eb;
-            background: #0d1928;
             overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
         }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 24px;
         }
 
-        /* Critical header styles */
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
         .header {
             position: fixed;
             top: 0;
+            left: 0;
             width: 100%;
-            background: rgba(13, 25, 40, 0.95);
-            -webkit-backdrop-filter: blur(10px);
-            backdrop-filter: blur(10px);
             z-index: 1000;
-            transition: all 0.3s ease;
-            border-bottom: 1px solid rgba(59, 130, 246, 0.2);
+            padding: 16px 20px;
+            pointer-events: none;
+            transition: padding 0.3s ease;
         }
 
         .nav-container {
-            max-width: 1200px;
+            max-width: 880px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 8px 0 20px;
+            height: 56px;
             display: flex;
+            align-items: center;
             justify-content: space-between;
-            align-items: center;
-            height: 70px;
+            background: rgba(3, 7, 18, 0.6);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 100px;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.12);
+            pointer-events: auto;
+            transition: background 0.3s, box-shadow 0.3s, border-color 0.3s;
         }
 
-        .nav-logo {
+        .nav-brand {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
+            text-decoration: none;
         }
 
-        .logo-img {
-            height: 40px;
-            width: 40px;
+        .nav-brand img {
+            width: 36px;
+            height: 36px;
             object-fit: contain;
         }
 
-        .logo-text {
-            font-size: 24px;
+        .header .nav-brand img {
+            width: 28px;
+            height: 28px;
+        }
+
+        .header .nav-brand span {
+            font-size: 1.125rem;
+        }
+
+        .nav-brand span {
+            font-size: 1.25rem;
             font-weight: 700;
-            color: #3b82f6;
+            color: #f8fafc;
         }
 
         .nav-menu {
             display: flex;
             list-style: none;
-            gap: 32px;
+            gap: 4px;
         }
 
         .nav-link {
             text-decoration: none;
-            color: #cbd5e1;
+            color: rgba(255, 255, 255, 0.65);
+            font-size: 0.875rem;
             font-weight: 500;
-            transition: color 0.3s ease;
-            position: relative;
+            padding: 6px 14px;
+            border-radius: 100px;
+            transition: color 0.2s, background 0.2s;
         }
 
         .nav-link:hover {
-            color: #3b82f6;
+            color: #fff;
+            background: rgba(255, 255, 255, 0.08);
         }
-        .nav-link:focus-visible {
-            outline: 2px solid #3b82f6;
-            outline-offset: 2px;
-            border-radius: 6px;
+
+        .nav-cta {
+            display: inline-flex;
+            align-items: center;
+            padding: 8px 18px;
+            background: #4f46e5;
+            color: #fff;
+            font-size: 0.8125rem;
+            font-weight: 600;
+            border-radius: 100px;
+            text-decoration: none;
+            transition: background 0.2s;
         }
 
         .nav-toggle {
             display: none;
-            font-size: 24px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.06);
+            border: none;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 1.125rem;
             cursor: pointer;
-            color: #cbd5e1;
         }
 
-        /* Critical hero section styles */
         .hero {
-            padding: 120px 0 80px;
-            background: linear-gradient(135deg, #0d1928 0%, #1e293b 55%, #3b82f6 90%);
-            color: white;
             min-height: 100vh;
             display: flex;
             align-items: center;
+            position: relative;
+            overflow: hidden;
+            padding: 120px 0 80px;
         }
 
-        .hero-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
+        .hero-glow {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            pointer-events: none;
+        }
+
+        .hero-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 60px;
+            gap: 64px;
             align-items: center;
-        }
-
-        .hero-content {
-            max-width: 620px;
+            position: relative;
+            z-index: 1;
         }
 
         .hero-title {
-            font-size: 3.5rem;
+            font-size: clamp(2.5rem, 5vw, 3.75rem);
             font-weight: 700;
-            line-height: 1.2;
+            line-height: 1.15;
             margin-bottom: 24px;
+            color: #f8fafc;
         }
 
-        .highlight {
-            background: linear-gradient(45deg, #fbbf24, #f59e0b);
+        .gradient-text {
+            background: linear-gradient(135deg, #6366f1, #8b5cf6, #06b6d4);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
 
-        .hero-description {
-            font-size: 1.25rem;
+        .hero-desc {
+            font-size: 1.125rem;
+            color: #94a3b8;
             margin-bottom: 32px;
-            opacity: 0.9;
+            line-height: 1.7;
         }
 
-        .hero-buttons {
+        .hero-actions {
             display: flex;
             gap: 16px;
-        }
-
-        .btn {
-            padding: 14px 28px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-            font-size: 16px;
-        }
-
-        .btn-primary {
-            background: #fbbf24;
-            color: #1f2937;
-        }
-
-        .btn-primary:hover {
-            background: #f59e0b;
-            transform: translateY(-2px);
-        }
-
-        .btn-secondary {
-            background: transparent;
-            color: white;
-            border: 1.5px solid rgba(255, 255, 255, 0.65);
-        }
-
-        .btn:focus-visible {
-            outline: 2px solid #3b82f6;
-            outline-offset: 2px;
-        }
-
-        .hero-graphic {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 30px;
             flex-wrap: wrap;
         }
 
-        .hero-graphic i {
-            font-size: 3.5rem;
-            color: rgba(255, 255, 255, 0.75);
-            animation: float 3s ease-in-out infinite;
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 10px;
+            transition: all 0.25s ease;
+            cursor: pointer;
+            border: none;
+            font-family: inherit;
         }
 
-        @keyframes float {
-
-            0%,
-            100% {
-                transform: translateY(0px);
-            }
-
-            50% {
-                transform: translateY(-14px);
-            }
+        .btn-lg {
+            padding: 14px 28px;
+            font-size: 1rem;
         }
 
-        /* Mobile responsiveness for critical elements */
+        .btn-primary {
+            background: #4f46e5;
+            color: #fff;
+        }
+
+        .btn-ghost {
+            background: transparent;
+            color: #e2e8f0;
+            border: 1.5px solid rgba(226, 232, 240, 0.2);
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: #818cf8;
+            padding: 6px 16px;
+            background: rgba(99, 102, 241, 0.1);
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            border-radius: 100px;
+            margin-bottom: 24px;
+        }
+
+        .skip-link {
+            position: absolute;
+            top: -100%;
+            left: 16px;
+            z-index: 10000;
+            padding: 8px 16px;
+            background: #4f46e5;
+            color: #fff;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.875rem;
+        }
+
+        .skip-link:focus {
+            top: 16px;
+        }
+
         @media (max-width: 768px) {
-            .nav-menu {
-                position: fixed;
-                top: 70px;
-                right: -100%;
-                width: 100%;
-                background: rgba(30, 41, 59, 0.85);
-                -webkit-backdrop-filter: blur(12px);
-                backdrop-filter: blur(12px);
-                transition: right 0.3s ease;
-                flex-direction: column;
-                padding: 20px;
-                gap: 16px;
-                z-index: 999;
+            .header {
+                padding: 12px 16px;
             }
 
-            .nav-menu.active {
-                right: 0;
+            .nav-container {
+                padding: 0 8px 0 16px;
+                backdrop-filter: none;
+                -webkit-backdrop-filter: none;
+                background: rgba(3, 7, 18, 0.92);
+            }
+
+            .nav-cta {
+                display: none;
             }
 
             .nav-toggle {
-                display: block;
+                display: flex;
+                align-items: center;
+                justify-content: center;
             }
 
-            .hero-container {
+            .nav-menu {
+                position: fixed;
+                inset: 0;
+                background: rgba(3, 7, 18, 0.98);
+                backdrop-filter: blur(20px);
+                -webkit-backdrop-filter: blur(20px);
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 8px;
+                opacity: 0;
+                visibility: hidden;
+                transition: opacity 0.3s, visibility 0.3s;
+                z-index: 999;
+                pointer-events: auto;
+            }
+
+            .nav-menu.active {
+                opacity: 1;
+                visibility: visible;
+            }
+
+            .nav-link {
+                font-size: 1.25rem;
+                color: rgba(255, 255, 255, 0.8);
+                padding: 12px 32px;
+                border-radius: 12px;
+            }
+
+            .hero-grid {
                 grid-template-columns: 1fr;
                 text-align: center;
             }
 
-            .hero-title {
-                font-size: 2.5rem;
+            .hero-visual {
+                display: none;
             }
 
-            .hero-buttons {
+            .hero-actions {
                 justify-content: center;
+            }
+
+            .hero-title {
+                font-size: clamp(2rem, 6vw, 2.75rem);
             }
         }
     </style>
 
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" href="/assets/favicon/favicon-96x96.png" sizes="96x96" />
-    <link rel="icon" type="image/svg+xml" href="/assets/favicon/favicon.svg" />
-    <link rel="shortcut icon" href="/assets/favicon/favicon.ico" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png" />
-    <link rel="manifest" href="/assets/favicon/site.webmanifest" />
-
-    <!-- Non-critical CSS loaded asynchronously -->
+    <!-- Non-critical CSS -->
     <link rel="preload" href="styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript>
         <link rel="stylesheet" href="styles.css">
     </noscript>
 
-    <!-- Font Awesome loaded asynchronously -->
-    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style"
+    <!-- Font Awesome -->
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" as="style"
         onload="this.onload=null;this.rel='stylesheet'">
     <noscript>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     </noscript>
 
-    <!-- Google Fonts with font-display:swap for better performance -->
+    <!-- Google Fonts -->
     <link rel="preload"
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap&display=swap"
-        as="style" onload="this.onload=null;this.rel='stylesheet'">
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" as="style"
+        onload="this.onload=null;this.rel='stylesheet'">
     <noscript>
-        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap&display=swap"
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
             rel="stylesheet">
     </noscript>
-
-    <!-- Fallback script for browsers that don't support preload -->
-    <script>
-        // Preload polyfill
-        !function (n) { "use strict"; n.loadCSS || (n.loadCSS = function () { }); var t = loadCSS.relpreload = {}; if (t.support = function () { var e; try { e = n.document.createElement("link").relList.supports("preload") } catch (t) { e = !1 } return function () { return e } }(), t.bindMediaToggle = function (t) { var e = t.media || "all"; function a() { t.media = e } t.addEventListener ? t.addEventListener("load", a) : t.attachEvent && t.attachEvent("onload", a), setTimeout(function () { t.rel = "stylesheet", t.media = "only x" }), setTimeout(a, 3e3) }, t.poly = function () { if (!t.support()) for (var e = n.document.getElementsByTagName("link"), a = 0; a < e.length; a++) { var o = e[a]; "preload" !== o.rel || "style" !== o.getAttribute("as") || o.getAttribute("data-loadcss") || (o.setAttribute("data-loadcss", !0), t.bindMediaToggle(o)) } }, !t.support()) { t.poly(); var e = n.setInterval(t.poly, 500); n.addEventListener ? n.addEventListener("load", function () { t.poly(), n.clearInterval(e) }) : n.attachEvent && n.attachEvent("onload", function () { t.poly(), n.clearInterval(e) }) } "undefined" != typeof exports ? exports.loadCSS = loadCSS : n.loadCSS = loadCSS }("undefined" != typeof global ? global : this);
-    </script>
 </head>
 
 <body>
+    <a href="#home" class="skip-link">Pular para o conteúdo</a>
+
     <!-- Header -->
     <header class="header">
         <nav class="nav">
             <div class="nav-container">
-                <div class="nav-logo">
+                <a href="#home" class="nav-brand">
                     <picture>
                         <source srcset="assets/logo-40.webp" type="image/webp">
-                        <img src="assets/logo.png" alt="NexaDuo Logo" class="logo-img" width="40" height="40">
+                        <img src="assets/logo.png" alt="NexaDuo" width="36" height="36">
                     </picture>
-                    <span class="logo-text">NexaDuo</span>
-                </div>
+                    <span>NexaDuo</span>
+                </a>
                 <ul class="nav-menu">
                     <li><a href="#home" class="nav-link">Início</a></li>
                     <li><a href="#services" class="nav-link">Serviços</a></li>
                     <li><a href="#contact" class="nav-link">Contato</a></li>
                 </ul>
-                <div class="nav-toggle">
+                <a href="#contact" class="nav-cta">Fale Conosco</a>
+                <button class="nav-toggle" aria-label="Menu" aria-expanded="false">
                     <i class="fas fa-bars"></i>
-                </div>
+                </button>
             </div>
         </nav>
     </header>
 
-    <!-- Hero Section -->
-    <section id="home" class="hero">
-        <div class="hero-container">
-            <div class="hero-content">
-                <h1 class="hero-title">
-                    Transformamos <span class="highlight">ideias</span> em
-                    <span class="highlight">soluções tecnológicas</span>
-                </h1>
-                <p class="hero-description">
-                    Na NexaDuo, desenvolvemos software personalizado e oferecemos consultoria tecnológica
-                    para impulsionar o crescimento do seu negócio no mundo digital.
-                </p>
-                <div class="hero-buttons">
-                    <a href="#contact" class="btn btn-primary">Fale Conosco</a>
-                    <a href="#services" class="btn btn-secondary">Nossos Serviços</a>
-                </div>
-            </div>
-            <div class="hero-image">
-                <div class="hero-graphic">
-                    <i class="fas fa-code"></i>
-                    <i class="fas fa-laptop-code"></i>
-                    <i class="fas fa-mobile-alt"></i>
-                    <i class="fas fa-cloud"></i>
-                </div>
-            </div>
-        </div>
-    </section>
-
-
-
-    <!-- Services Section -->
-    <section id="services" class="services">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Nossos Serviços</h2>
-                <p class="section-subtitle">Soluções completas para o seu negócio</p>
-            </div>
-            <div class="services-grid">
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-chart-line"></i>
+    <main>
+        <!-- Hero -->
+        <section id="home" class="hero">
+            <div class="hero-glow hero-glow-1"></div>
+            <div class="hero-glow hero-glow-2"></div>
+            <div class="hero-glow hero-glow-3"></div>
+            <div class="container hero-grid">
+                <div class="hero-content">
+                    <div class="hero-badge">
+                        <span class="hero-badge-dot"></span>
+                        Inovação &amp; Tecnologia
                     </div>
-                    <h3>Consultoria Tecnológica</h3>
-                    <p>Orientamos sua empresa na escolha das melhores tecnologias e estratégias digitais.</p>
-                    <ul>
-                        <li>Análise de Arquitetura</li>
-                        <li>Auditoria de Código</li>
-                        <li>Planejamento Estratégico</li>
-                        <li>Otimização de Performance</li>
-                    </ul>
-                </div>
-
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-database"></i>
+                    <h1 class="hero-title">
+                        Transformamos <span class="gradient-text">ideias</span> em
+                        <span class="gradient-text">soluções tecnológicas</span>
+                    </h1>
+                    <p class="hero-desc">
+                        Desenvolvemos software personalizado e oferecemos consultoria
+                        tecnológica para impulsionar o crescimento do seu negócio no mundo digital.
+                    </p>
+                    <div class="hero-actions">
+                        <a href="#contact" class="btn btn-primary btn-lg">
+                            Fale Conosco
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                        <a href="#services" class="btn btn-ghost btn-lg">Nossos Serviços</a>
                     </div>
-                    <h3>Dados & Analytics</h3>
-                    <p>Transformamos seus dados em insights valiosos através de dashboards e análises avançadas.</p>
-                    <ul>
-                        <li>Business Intelligence</li>
-                        <li>Data Visualization</li>
-                        <li>Machine Learning</li>
-                        <li>Big Data Solutions</li>
-                    </ul>
                 </div>
-
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-heartbeat"></i>
-                    </div>
-                    <h3>Saúde Digital</h3>
-                    <p>Desenvolvemos soluções tecnológicas inovadoras para o setor de saúde e telemedicina.</p>
-                    <ul>
-                        <li>Plataformas de Teleatendimento</li>
-                        <li>Prontuários Eletrônicos Personalizados</li>
-                        <li>Consultoria em Saúde Digital</li>
-                        <li>Sistemas de Gestão Hospitalar</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="contact">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Entre em Contato</h2>
-                <p class="section-subtitle">Vamos conversar sobre seu próximo projeto</p>
-            </div>
-            <div class="contact-content">
-                <div class="contact-info">
-                    <h3>Fale Conosco</h3>
-                    <p>Estamos prontos para ajudar você a transformar suas ideias em realidade. Entre em contato e vamos
-                        discutir como podemos impulsionar seu negócio.</p>
-
-                    <div class="contact-boxes">
-                        <div class="contact-persons-box">
-                            <div class="contact-person">
-                                <picture>
-                                    <source srcset="assets/alexandre-64.webp" type="image/webp">
-                                    <img src="assets/alexandre.jpeg" alt="Alexandre Machado"
-                                        class="contact-photo rounded" width="64" height="64" loading="lazy">
-                                </picture>
-                                <div class="contact-person-details">
-                                    <h4>Alexandre Machado</h4>
-                                    <p><i class="fas fa-phone"></i> <span>+55 (51) 981 508 375</span></p>
-                                    <p><i class="fas fa-envelope"></i> <span>alexandre@nexaduo.com</span></p>
-                                </div>
+                <div class="hero-visual">
+                    <div class="code-window">
+                        <div class="code-header">
+                            <div class="code-dots">
+                                <span class="code-dot" style="background:#ef4444"></span>
+                                <span class="code-dot" style="background:#eab308"></span>
+                                <span class="code-dot" style="background:#22c55e"></span>
                             </div>
-                            <div class="contact-person">
-                                <picture>
-                                    <source srcset="assets/sheyla-64.webp" type="image/webp">
-                                    <img src="assets/sheyla.jpeg" alt="Sheyla Paladini" class="contact-photo rounded"
-                                        width="64" height="64" loading="lazy">
-                                </picture>
-                                <div class="contact-person-details">
-                                    <h4>Sheyla Paladini</h4>
-                                    <p><i class="fas fa-phone"></i> <span>+55 (51) 992 654 423</span></p>
-                                    <p><i class="fas fa-envelope"></i> <span>sheyla@nexaduo.com</span></p>
-                                </div>
+                            <span class="code-title">nexaduo.js</span>
+                        </div>
+                        <pre class="code-body"><code><span class="code-keyword">const</span> <span class="code-var">nexaduo</span> = {
+  <span class="code-prop">missão</span>: <span class="code-string">"inovar"</span>,
+  <span class="code-prop">serviços</span>: [
+    <span class="code-string">"Consultoria Tecnológica"</span>,
+    <span class="code-string">"Dados &amp; Analytics"</span>,
+    <span class="code-string">"Saúde Digital"</span>
+  ],
+  <span class="code-fn">transformar</span>(<span class="code-param">ideia</span>) {
+    <span class="code-keyword">return</span> <span class="code-var">solução</span>.<span class="code-fn">criar</span>(<span class="code-param">ideia</span>);
+  }
+};</code></pre>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services -->
+        <section id="services" class="services">
+            <div class="container">
+                <div class="section-header reveal">
+                    <span class="section-tag">Serviços</span>
+                    <h2 class="section-title">Soluções completas para o seu negócio</h2>
+                    <p class="section-desc">
+                        Combinamos expertise técnica com visão estratégica para entregar
+                        resultados que fazem a diferença.
+                    </p>
+                </div>
+                <div class="services-grid">
+                    <article class="service-card reveal">
+                        <div class="service-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h3>Consultoria Tecnológica</h3>
+                        <p>Orientamos sua empresa na escolha das melhores tecnologias e estratégias digitais.</p>
+                        <ul class="service-list">
+                            <li>Análise de Arquitetura</li>
+                            <li>Auditoria de Código</li>
+                            <li>Planejamento Estratégico</li>
+                            <li>Otimização de Performance</li>
+                        </ul>
+                    </article>
+
+                    <article class="service-card reveal">
+                        <div class="service-icon">
+                            <i class="fas fa-database"></i>
+                        </div>
+                        <h3>Dados &amp; Analytics</h3>
+                        <p>Transformamos seus dados em insights valiosos através de dashboards e análises avançadas.</p>
+                        <ul class="service-list">
+                            <li>Business Intelligence</li>
+                            <li>Data Visualization</li>
+                            <li>Machine Learning</li>
+                            <li>Big Data Solutions</li>
+                        </ul>
+                    </article>
+
+                    <article class="service-card reveal">
+                        <div class="service-icon">
+                            <i class="fas fa-heartbeat"></i>
+                        </div>
+                        <h3>Saúde Digital</h3>
+                        <p>Desenvolvemos soluções tecnológicas inovadoras para o setor de saúde e telemedicina.</p>
+                        <ul class="service-list">
+                            <li>Plataformas de Teleatendimento</li>
+                            <li>Prontuários Eletrônicos</li>
+                            <li>Consultoria em Saúde Digital</li>
+                            <li>Gestão Hospitalar</li>
+                        </ul>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact -->
+        <section id="contact" class="contact">
+            <div class="container">
+                <div class="section-header reveal">
+                    <span class="section-tag">Contato</span>
+                    <h2 class="section-title">Vamos conversar sobre seu projeto</h2>
+                    <p class="section-desc">
+                        Estamos prontos para ajudar você a transformar suas ideias em realidade.
+                    </p>
+                </div>
+                <div class="contact-grid">
+                    <div class="contact-team reveal">
+                        <h3>Nossa Equipe</h3>
+                        <div class="contact-person">
+                            <picture>
+                                <source srcset="assets/alexandre-64.webp" type="image/webp">
+                                <img src="assets/alexandre.jpeg" alt="Alexandre Machado" class="contact-photo"
+                                    width="64" height="64" loading="lazy">
+                            </picture>
+                            <div class="contact-person-info">
+                                <h4>Alexandre Machado</h4>
+                                <p><i class="fas fa-phone"></i> +55 (51) 981 508 375</p>
+                                <p><i class="fas fa-envelope"></i> alexandre@nexaduo.com</p>
                             </div>
                         </div>
-                        <div class="contact-details-box">
-                            <div class="contact-item">
-                                <i class="fas fa-envelope"></i>
-                                <span>contato@nexaduo.com</span>
+                        <div class="contact-person">
+                            <picture>
+                                <source srcset="assets/sheyla-64.webp" type="image/webp">
+                                <img src="assets/sheyla.jpeg" alt="Sheyla Paladini" class="contact-photo" width="64"
+                                    height="64" loading="lazy">
+                            </picture>
+                            <div class="contact-person-info">
+                                <h4>Sheyla Paladini</h4>
+                                <p><i class="fas fa-phone"></i> +55 (51) 992 654 423</p>
+                                <p><i class="fas fa-envelope"></i> sheyla@nexaduo.com</p>
                             </div>
-                            <div class="contact-item">
-                                <i class="fas fa-map-marker-alt"></i>
-                                <span>Porto Alegre, RS - Brasil</span>
-                            </div>
-                            <div class="contact-item">
-                                <i class="fas fa-building"></i>
-                                <span>29.667.108/0001-14</span>
-                            </div>
-                            <div class="social-links">
-                                <a href="https://www.linkedin.com/company/nexaduo" target="_blank"
-                                    rel="noopener noreferrer" class="social-link" aria-label="LinkedIn"><i
-                                        class="fab fa-linkedin"></i></a>
-                                <a href="https://github.com/NexaDuo" target="_blank" rel="noopener noreferrer"
-                                    class="social-link" aria-label="GitHub"><i class="fab fa-github"></i></a>
-                            </div>
+                        </div>
+                    </div>
+                    <div class="contact-details reveal">
+                        <h3>Informações</h3>
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <span>contato@nexaduo.com</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Porto Alegre, RS - Brasil</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-building"></i>
+                            <span>CNPJ: 29.667.108/0001-14</span>
+                        </div>
+                        <div class="contact-social">
+                            <a href="https://www.linkedin.com/company/nexaduo" target="_blank" rel="noopener noreferrer"
+                                class="social-link" aria-label="LinkedIn">
+                                <i class="fab fa-linkedin"></i>
+                            </a>
+                            <a href="https://github.com/NexaDuo" target="_blank" rel="noopener noreferrer"
+                                class="social-link" aria-label="GitHub">
+                                <i class="fab fa-github"></i>
+                            </a>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+    </main>
 
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <div class="footer-content">
+            <div class="footer-grid">
                 <div class="footer-brand">
-                    <picture>
-                        <source srcset="assets/NexaDuo-40.webp" type="image/webp">
-                        <img src="assets/NexaDuo.png" alt="NexaDuo Logo" class="footer-logo" width="40" height="40">
-                    </picture>
+                    <a href="#home" class="nav-brand">
+                        <picture>
+                            <source srcset="assets/NexaDuo-40.webp" type="image/webp">
+                            <img src="assets/NexaDuo.png" alt="NexaDuo" width="36" height="36">
+                        </picture>
+                        <span>NexaDuo</span>
+                    </a>
                     <p>Transformando ideias em soluções tecnológicas inovadoras.</p>
                 </div>
-                <div class="footer-links">
-                    <h4>Links Rápidos</h4>
+                <div class="footer-nav">
+                    <h4>Links</h4>
                     <ul>
                         <li><a href="#home">Início</a></li>
                         <li><a href="#services">Serviços</a></li>
                         <li><a href="#contact">Contato</a></li>
                     </ul>
                 </div>
-                <div class="footer-contact">
+                <div class="footer-info">
                     <h4>Contato</h4>
                     <p>contato@nexaduo.com</p>
-                    <p>Alexandre Machado: +55 (51) 981 508 375</p>
-                    <p>Sheyla Paladini: +55 (51) 992 654 423</p>
+                    <p>Porto Alegre, RS - Brasil</p>
                     <p>CNPJ: 29.667.108/0001-14</p>
                 </div>
-                <div class="footer-social">
-                    <h4>Redes Sociais</h4>
-                    <div class="social-links">
-                        <a href="https://github.com/NexaDuo" target="_blank" rel="noopener noreferrer"
-                            aria-label="GitHub">
-                            <i class="fab fa-github"></i> GitHub
-                        </a>
-                    </div>
-                </div>
             </div>
+            <div class="footer-divider"></div>
             <div class="footer-bottom">
-                <p>&copy; 2025 NexaDuo. Todos os direitos reservados.</p>
+                <p>&copy; 2026 NexaDuo. Todos os direitos reservados.</p>
+                <div class="footer-social">
+                    <a href="https://www.linkedin.com/company/nexaduo" target="_blank" rel="noopener noreferrer"
+                        aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://github.com/NexaDuo" target="_blank" rel="noopener noreferrer"
+                        aria-label="GitHub"><i class="fab fa-github"></i></a>
+                </div>
             </div>
         </div>
     </footer>
 
-    <script src="script.min.js" defer></script>
+    <script src="script.js" defer></script>
 
-    <!-- clarity.microsoft.com -->
+    <!-- Microsoft Clarity -->
     <script type="text/javascript">
         (function (c, l, a, r, i, t, y) {
             c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments) };

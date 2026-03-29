@@ -1,0 +1,28 @@
+{
+  "name": "nexaduo.github.io",
+  "version": "1.0.0",
+  "description": "Site oficial da NexaDuo, uma empresa especializada em desenvolvimento de software, consultoria tecnológica e soluções digitais inovadoras.",
+  "main": "script.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "node tests/site.test.mjs",
+    "test:headed": "node tests/site.test.mjs --headed"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NexaDuo/nexaduo.github.io.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/NexaDuo/nexaduo.github.io/issues"
+  },
+  "homepage": "https://github.com/NexaDuo/nexaduo.github.io#readme",
+  "devDependencies": {
+    "playwright": "^1.58.2"
+  }
+}
