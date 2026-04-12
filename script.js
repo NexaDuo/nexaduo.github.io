@@ -14,18 +14,43 @@ function setupNavigation() {
 
     if (!toggle || !menu) return;
 
+    function toggleIcon(isOpen) {
+        const icon = toggle.querySelector('i');
+        if (icon) {
+            icon.classList.remove(isOpen ? 'fa-bars' : 'fa-xmark');
+            icon.classList.add(isOpen ? 'fa-xmark' : 'fa-bars');
+        }
+    }
+
     toggle.addEventListener('click', () => {
         const isOpen = menu.classList.toggle('active');
         toggle.setAttribute('aria-expanded', isOpen);
-        toggle.querySelector('i').className = isOpen ? 'fas fa-xmark' : 'fas fa-bars';
+        toggleIcon(isOpen);
         document.body.classList.toggle('menu-open', isOpen);
     });
 
     function closeMenu() {
         menu.classList.remove('active');
         toggle.setAttribute('aria-expanded', 'false');
-        toggle.querySelector('i').className = 'fas fa-bars';
+        toggleIcon(false);
         document.body.classList.remove('menu-open');
+    }
+
+    function smoothScrollTo(targetId, e) {
+        if (!targetId || targetId === '#' || !targetId.startsWith('#')) return;
+
+        try {
+            const target = document.querySelector(targetId);
+            if (target) {
+                if (e) e.preventDefault();
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                history.replaceState(null, '', window.location.pathname);
+                return true;
+            }
+        } catch (err) {
+            console.warn('Invalid selector:', targetId);
+        }
+        return false;
     }
 
     menu.addEventListener('click', (e) => {
@@ -33,13 +58,7 @@ function setupNavigation() {
         if (!link) return;
 
         closeMenu();
-
-        const targetId = link.getAttribute('href');
-        if (targetId?.startsWith('#') && targetId.length > 1) {
-            e.preventDefault();
-            document.querySelector(targetId)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            history.replaceState(null, '', window.location.pathname);
-        }
+        smoothScrollTo(link.getAttribute('href'), e);
     });
 
     document.addEventListener('keydown', (e) => {
@@ -53,12 +72,7 @@ function setupNavigation() {
         const anchor = e.target.closest('a[href^="#"]:not(.nav-link)');
         if (!anchor) return;
 
-        const href = anchor.getAttribute('href');
-        if (!href || href === '#' || href.length <= 1) return;
-
-        e.preventDefault();
-        document.querySelector(href)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        history.replaceState(null, '', window.location.pathname);
+        smoothScrollTo(anchor.getAttribute('href'), e);
     });
 }
 
@@ -92,13 +106,14 @@ function setupRevealAnimations() {
         { threshold: 0.1, rootMargin: '0px 0px -60px 0px' }
     );
 
+    const reveals = document.querySelectorAll('.reveal');
     if ('requestIdleCallback' in window) {
         requestIdleCallback(() => {
-            document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+            reveals.forEach((el) => observer.observe(el));
         });
     } else {
         setTimeout(() => {
-            document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+            reveals.forEach((el) => observer.observe(el));
         }, 200);
     }
 }
