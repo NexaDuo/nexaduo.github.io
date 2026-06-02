@@ -119,12 +119,12 @@ assert(bgClip === 'text', 'Gradient text effect applied');
 // Services section
 console.log('\n💼 Services');
 const cards = desktop.locator('.service-card');
-assert(await cards.count() === 3, '3 service cards');
+assert(await cards.count() === 2, '2 service cards');
 
 // Check grid layout (3 columns)
 const card1 = await cards.nth(0).boundingBox();
 const card2 = await cards.nth(1).boundingBox();
-assert(Math.abs(card1.y - card2.y) < 5, 'Cards are in same row (3-col grid)');
+assert(Math.abs(card1.y - card2.y) < 5, 'Cards are in same row (2-col grid)');
 
 // Reveal animations
 await desktop.locator('#services').scrollIntoViewIfNeeded();
