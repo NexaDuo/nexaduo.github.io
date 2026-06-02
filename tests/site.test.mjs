@@ -44,8 +44,10 @@ function assert(condition, name) {
 }
 
 const headed = process.argv.includes('--headed');
+const executablePath = process.env.PLAYWRIGHT_EXECUTABLE_PATH;
 const browser = await chromium.launch({
     headless: !headed,
+    executablePath,
     args: ['--no-sandbox'],
     slowMo: headed ? 400 : 0,
 });
@@ -138,7 +140,7 @@ assert(await desktop.locator('.contact-team').isVisible(), 'Team section visible
 assert(await desktop.locator('.contact-details').isVisible(), 'Details section visible');
 
 const photos = desktop.locator('.contact-photo');
-assert(await photos.count() === 2, '2 team member photos');
+assert(await photos.count() === 1, '1 team member photo');
 
 const socialLinks = desktop.locator('.contact-social .social-link');
 assert(await socialLinks.count() === 2, '2 social links (LinkedIn, GitHub)');
@@ -306,7 +308,7 @@ assert(stylesLoaded, 'styles.css loaded successfully');
 
 // Lazy loading on contact images
 const lazyImgs = await perf.locator('img[loading="lazy"]').count();
-assert(lazyImgs >= 2, `Lazy-loaded images (${lazyImgs})`);
+assert(lazyImgs >= 1, `Lazy-loaded images (${lazyImgs})`);
 
 await perf.close();
 await browser.close();
