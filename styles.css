@@ -1185,7 +1185,7 @@ body.menu-open {
 
 .legal-header {
     max-width: 720px;
-    margin-bottom: 48px;
+    margin: 0 auto 48px;
 }
 
 .legal-header h1 {
@@ -1203,6 +1203,7 @@ body.menu-open {
 
 .legal-content {
     max-width: 720px;
+    margin: 0 auto;
     color: var(--text-secondary);
 }
 
