@@ -4,11 +4,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Termos de Uso - NexaDuo</title>
-    <meta name="description" content="Termos de Uso da NexaDuo. Leia as condições que regem o uso do nosso site e serviços.">
+
+    <!-- Resolve language as early as possible to avoid a flash of the wrong language (FOUC) -->
+    <script>
+        (function () {
+            try {
+                var s = localStorage.getItem('nexaduo-lang');
+                var lang = (s === 'en' || s === 'pt') ? s
+                    : ((navigator.language || navigator.userLanguage || '').toLowerCase().indexOf('en') === 0 ? 'en' : 'pt');
+                document.documentElement.lang = lang === 'en' ? 'en' : 'pt-BR';
+            } catch (e) { /* keep default lang */ }
+        })();
+    </script>
+
+    <title data-i18n="terms.meta_title">Termos de Uso - NexaDuo</title>
+    <meta name="description" data-i18n-attr="content:terms.meta_description"
+        content="Termos de Uso da NexaDuo. Leia as condições que regem o uso do nosso site e serviços.">
     <meta name="robots" content="index, follow">
 
-    <meta property="og:title" content="Termos de Uso - NexaDuo">
+    <meta property="og:title" data-i18n-attr="content:terms.meta_title" content="Termos de Uso - NexaDuo">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://nexaduo.com/terms-of-service.html">
 
@@ -153,6 +167,46 @@
             cursor: pointer;
         }
 
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .lang-switch {
+            display: inline-flex;
+            align-items: center;
+            gap: 2px;
+            padding: 2px;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 100px;
+        }
+
+        .lang-btn {
+            border: none;
+            background: transparent;
+            color: rgba(255, 255, 255, 0.6);
+            font-family: inherit;
+            font-size: 0.75rem;
+            font-weight: 600;
+            line-height: 1;
+            padding: 5px 10px;
+            border-radius: 100px;
+            cursor: pointer;
+            transition: color 0.2s, background 0.2s;
+        }
+
+        .lang-btn:hover {
+            color: #fff;
+        }
+
+        .lang-btn.active,
+        .lang-btn[aria-pressed="true"] {
+            background: #4f46e5;
+            color: #fff;
+        }
+
         .skip-link {
             position: absolute;
             top: -100%;
@@ -258,7 +312,7 @@
 </head>
 
 <body>
-    <a href="#main-content" class="skip-link">Pular para o conteúdo</a>
+    <a href="#main-content" class="skip-link" data-i18n="skip">Pular para o conteúdo</a>
 
     <!-- Header -->
     <header class="header">
@@ -272,14 +326,23 @@
                     <span>NexaDuo</span>
                 </a>
                 <ul id="nav-menu" class="nav-menu">
-                    <li><a href="/#home" class="nav-link">Início</a></li>
-                    <li><a href="/#services" class="nav-link">Serviços</a></li>
-                    <li><a href="/#contact" class="nav-link">Contato</a></li>
+                    <li><a href="/#home" class="nav-link" data-i18n="nav.home">Início</a></li>
+                    <li><a href="/#services" class="nav-link" data-i18n="nav.services">Serviços</a></li>
+                    <li><a href="/#contact" class="nav-link" data-i18n="nav.contact">Contato</a></li>
                 </ul>
-                <a href="/#contact" class="nav-cta">Fale Conosco</a>
-                <button class="nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="nav-menu">
-                    <i class="fas fa-bars"></i>
-                </button>
+                <div class="nav-actions">
+                    <div class="lang-switch" role="group" aria-label="Selecionar idioma"
+                        data-i18n-attr="aria-label:lang.aria">
+                        <button type="button" class="lang-btn" data-lang="en" aria-pressed="false"
+                            aria-label="English">EN</button>
+                        <button type="button" class="lang-btn" data-lang="pt" aria-pressed="true"
+                            aria-label="Português">PT</button>
+                    </div>
+                    <a href="/#contact" class="nav-cta" data-i18n="nav.cta">Fale Conosco</a>
+                    <button class="nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="nav-menu">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
             </div>
         </nav>
     </header>
@@ -288,49 +351,49 @@
         <section class="legal-page">
             <div class="container">
                 <div class="legal-header">
-                    <span class="section-tag">Legal</span>
-                    <h1>Termos de Uso</h1>
-                    <p class="legal-updated">Última atualização: junho de 2026</p>
+                    <span class="section-tag" data-i18n="legal.tag">Legal</span>
+                    <h1 data-i18n="terms.h1">Termos de Uso</h1>
+                    <p class="legal-updated" data-i18n="legal.updated">Última atualização: junho de 2026</p>
                 </div>
 
                 <div class="legal-content">
-                    <p>Ao acessar e utilizar o site <strong>nexaduo.com</strong>, você concorda com os presentes Termos de Uso. Se não concordar com qualquer disposição, por favor, não utilize o site.</p>
+                    <p data-i18n="terms.intro">Ao acessar e utilizar o site <strong>nexaduo.com</strong>, você concorda com os presentes Termos de Uso. Se não concordar com qualquer disposição, por favor, não utilize o site.</p>
 
-                    <h2>1. Sobre a NexaDuo</h2>
-                    <p>A NexaDuo é uma empresa brasileira de tecnologia (CNPJ 29.667.108/0001-14), sediada em Porto Alegre, RS, especializada em consultoria tecnológica, desenvolvimento de software e soluções de dados e analytics.</p>
+                    <h2 data-i18n="terms.h2_1">1. Sobre a NexaDuo</h2>
+                    <p data-i18n="terms.p_1">A NexaDuo é uma empresa brasileira de tecnologia (CNPJ 29.667.108/0001-14), sediada em Porto Alegre, RS, especializada em consultoria tecnológica, desenvolvimento de software e soluções de dados e analytics.</p>
 
-                    <h2>2. Uso do site</h2>
-                    <p>O site nexaduo.com tem caráter informativo e institucional. Você se compromete a utilizá-lo somente para fins lícitos e a não praticar atos que possam prejudicar a NexaDuo, outros usuários ou terceiros, incluindo:</p>
+                    <h2 data-i18n="terms.h2_2">2. Uso do site</h2>
+                    <p data-i18n="terms.p_2">O site nexaduo.com tem caráter informativo e institucional. Você se compromete a utilizá-lo somente para fins lícitos e a não praticar atos que possam prejudicar a NexaDuo, outros usuários ou terceiros, incluindo:</p>
                     <ul>
-                        <li>Acesso não autorizado a sistemas ou dados;</li>
-                        <li>Distribuição de conteúdo malicioso ou ilegal;</li>
-                        <li>Reprodução do conteúdo sem autorização prévia e por escrito.</li>
+                        <li data-i18n="terms.li_2_1">Acesso não autorizado a sistemas ou dados;</li>
+                        <li data-i18n="terms.li_2_2">Distribuição de conteúdo malicioso ou ilegal;</li>
+                        <li data-i18n="terms.li_2_3">Reprodução do conteúdo sem autorização prévia e por escrito.</li>
                     </ul>
 
-                    <h2>3. Propriedade intelectual</h2>
-                    <p>Todo o conteúdo disponível no site — incluindo textos, imagens, logotipos e código-fonte — é de propriedade exclusiva da NexaDuo ou de seus licenciantes, protegido pela legislação brasileira de direitos autorais (Lei nº 9.610/1998). É vedada qualquer reprodução ou uso sem autorização.</p>
+                    <h2 data-i18n="terms.h2_3">3. Propriedade intelectual</h2>
+                    <p data-i18n="terms.p_3">Todo o conteúdo disponível no site — incluindo textos, imagens, logotipos e código-fonte — é de propriedade exclusiva da NexaDuo ou de seus licenciantes, protegido pela legislação brasileira de direitos autorais (Lei nº 9.610/1998). É vedada qualquer reprodução ou uso sem autorização.</p>
 
-                    <h2>4. Serviços contratados</h2>
-                    <p>Os serviços prestados pela NexaDuo são regidos por contratos individuais celebrados com cada cliente. Esses contratos prevalecem sobre estes Termos de Uso no que se refere às obrigações das partes.</p>
+                    <h2 data-i18n="terms.h2_4">4. Serviços contratados</h2>
+                    <p data-i18n="terms.p_4">Os serviços prestados pela NexaDuo são regidos por contratos individuais celebrados com cada cliente. Esses contratos prevalecem sobre estes Termos de Uso no que se refere às obrigações das partes.</p>
 
-                    <h2>5. Limitação de responsabilidade</h2>
-                    <p>O site é fornecido "como está", sem garantias de disponibilidade ininterrupta. A NexaDuo não se responsabiliza por danos decorrentes de interrupções, erros ou uso indevido do site por terceiros.</p>
+                    <h2 data-i18n="terms.h2_5">5. Limitação de responsabilidade</h2>
+                    <p data-i18n="terms.p_5">O site é fornecido "como está", sem garantias de disponibilidade ininterrupta. A NexaDuo não se responsabiliza por danos decorrentes de interrupções, erros ou uso indevido do site por terceiros.</p>
 
-                    <h2>6. Links externos</h2>
-                    <p>O site pode conter links para sites de terceiros. A NexaDuo não controla e não se responsabiliza pelo conteúdo ou pelas práticas de privacidade desses sites.</p>
+                    <h2 data-i18n="terms.h2_6">6. Links externos</h2>
+                    <p data-i18n="terms.p_6">O site pode conter links para sites de terceiros. A NexaDuo não controla e não se responsabiliza pelo conteúdo ou pelas práticas de privacidade desses sites.</p>
 
-                    <h2>7. Legislação aplicável</h2>
-                    <p>Estes Termos de Uso são regidos pelas leis da República Federativa do Brasil. Fica eleito o foro da Comarca de Porto Alegre, RS, para dirimir quaisquer conflitos decorrentes desta relação, com renúncia a qualquer outro, por mais privilegiado que seja.</p>
+                    <h2 data-i18n="terms.h2_7">7. Legislação aplicável</h2>
+                    <p data-i18n="terms.p_7">Estes Termos de Uso são regidos pelas leis da República Federativa do Brasil. Fica eleito o foro da Comarca de Porto Alegre, RS, para dirimir quaisquer conflitos decorrentes desta relação, com renúncia a qualquer outro, por mais privilegiado que seja.</p>
 
-                    <h2>8. Alterações nos termos</h2>
-                    <p>Podemos revisar estes Termos de Uso a qualquer momento. A data de "última atualização" no topo desta página indica quando ocorreu a revisão mais recente. O uso continuado do site após alterações constitui aceitação dos novos termos.</p>
+                    <h2 data-i18n="terms.h2_8">8. Alterações nos termos</h2>
+                    <p data-i18n="terms.p_8">Podemos revisar estes Termos de Uso a qualquer momento. A data de "última atualização" no topo desta página indica quando ocorreu a revisão mais recente. O uso continuado do site após alterações constitui aceitação dos novos termos.</p>
 
-                    <h2>9. Contato</h2>
-                    <p>Para dúvidas ou solicitações relacionadas a estes Termos de Uso:</p>
+                    <h2 data-i18n="terms.h2_9">9. Contato</h2>
+                    <p data-i18n="terms.p_9">Para dúvidas ou solicitações relacionadas a estes Termos de Uso:</p>
                     <ul>
-                        <li><strong>E-mail:</strong> <a href="mailto:contato@nexaduo.com">contato@nexaduo.com</a></li>
-                        <li><strong>Empresa:</strong> NexaDuo — CNPJ 29.667.108/0001-14</li>
-                        <li><strong>Endereço:</strong> Porto Alegre, RS — Brasil</li>
+                        <li data-i18n="legal.li_email"><strong>E-mail:</strong> <a href="mailto:contato@nexaduo.com">contato@nexaduo.com</a></li>
+                        <li data-i18n="legal.li_company"><strong>Empresa:</strong> NexaDuo — CNPJ 29.667.108/0001-14</li>
+                        <li data-i18n="legal.li_address"><strong>Endereço:</strong> Porto Alegre, RS — Brasil</li>
                     </ul>
                 </div>
             </div>
@@ -349,28 +412,28 @@
                         </picture>
                         <span>NexaDuo</span>
                     </a>
-                    <p>Transformando ideias em soluções tecnológicas inovadoras.</p>
+                    <p data-i18n="footer.tagline">Transformando ideias em soluções tecnológicas inovadoras.</p>
                 </div>
                 <div class="footer-nav">
-                    <h4>Links</h4>
+                    <h4 data-i18n="footer.links">Links</h4>
                     <ul>
-                        <li><a href="/#home">Início</a></li>
-                        <li><a href="/#services">Serviços</a></li>
-                        <li><a href="/#contact">Contato</a></li>
-                        <li><a href="/privacy-policy">Política de Privacidade</a></li>
-                        <li><a href="/terms-of-service">Termos de Uso</a></li>
+                        <li><a href="/#home" data-i18n="nav.home">Início</a></li>
+                        <li><a href="/#services" data-i18n="nav.services">Serviços</a></li>
+                        <li><a href="/#contact" data-i18n="nav.contact">Contato</a></li>
+                        <li><a href="/privacy-policy" data-i18n="footer.privacy">Política de Privacidade</a></li>
+                        <li><a href="/terms-of-service" data-i18n="footer.terms">Termos de Uso</a></li>
                     </ul>
                 </div>
                 <div class="footer-info">
-                    <h4>Contato</h4>
+                    <h4 data-i18n="footer.contact_title">Contato</h4>
                     <p>contato@nexaduo.com</p>
-                    <p>Porto Alegre, RS - Brasil</p>
+                    <p data-i18n="contact.location">Porto Alegre, RS - Brasil</p>
                     <p>CNPJ: 29.667.108/0001-14</p>
                 </div>
             </div>
             <div class="footer-divider"></div>
             <div class="footer-bottom">
-                <p>&copy; 2026 NexaDuo. Todos os direitos reservados.</p>
+                <p data-i18n="footer.copyright">&copy; 2026 NexaDuo. Todos os direitos reservados.</p>
                 <div class="footer-social">
                     <a href="https://www.linkedin.com/company/nexaduo" target="_blank" rel="noopener noreferrer"
                         aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
@@ -381,6 +444,7 @@
         </div>
     </footer>
 
+    <script src="/i18n.js" defer></script>
     <script src="/script.js" defer></script>
 </body>
 
