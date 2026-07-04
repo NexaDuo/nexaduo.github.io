@@ -47,6 +47,9 @@ node_modules/
 *.swp
 *.swo
 
+# Agent tooling
+.serena/
+
 # OS generated files
 .DS_Store
 .DS_Store?
