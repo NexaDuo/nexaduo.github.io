@@ -4,11 +4,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Política de Privacidade - NexaDuo</title>
-    <meta name="description" content="Política de Privacidade da NexaDuo. Saiba como coletamos, usamos e protegemos suas informações.">
+
+    <!-- Resolve language as early as possible to avoid a flash of the wrong language (FOUC) -->
+    <script>
+        (function () {
+            try {
+                var s = localStorage.getItem('nexaduo-lang');
+                var lang = (s === 'en' || s === 'pt') ? s
+                    : ((navigator.language || navigator.userLanguage || '').toLowerCase().indexOf('en') === 0 ? 'en' : 'pt');
+                document.documentElement.lang = lang === 'en' ? 'en' : 'pt-BR';
+            } catch (e) { /* keep default lang */ }
+        })();
+    </script>
+
+    <title data-i18n="privacy.meta_title">Política de Privacidade - NexaDuo</title>
+    <meta name="description" data-i18n-attr="content:privacy.meta_description"
+        content="Política de Privacidade da NexaDuo. Saiba como coletamos, usamos e protegemos suas informações.">
     <meta name="robots" content="index, follow">
 
-    <meta property="og:title" content="Política de Privacidade - NexaDuo">
+    <meta property="og:title" data-i18n-attr="content:privacy.meta_title"
+        content="Política de Privacidade - NexaDuo">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://nexaduo.com/privacy-policy.html">
 
@@ -153,6 +168,46 @@
             cursor: pointer;
         }
 
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .lang-switch {
+            display: inline-flex;
+            align-items: center;
+            gap: 2px;
+            padding: 2px;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 100px;
+        }
+
+        .lang-btn {
+            border: none;
+            background: transparent;
+            color: rgba(255, 255, 255, 0.6);
+            font-family: inherit;
+            font-size: 0.75rem;
+            font-weight: 600;
+            line-height: 1;
+            padding: 5px 10px;
+            border-radius: 100px;
+            cursor: pointer;
+            transition: color 0.2s, background 0.2s;
+        }
+
+        .lang-btn:hover {
+            color: #fff;
+        }
+
+        .lang-btn.active,
+        .lang-btn[aria-pressed="true"] {
+            background: #4f46e5;
+            color: #fff;
+        }
+
         .skip-link {
             position: absolute;
             top: -100%;
@@ -258,7 +313,7 @@
 </head>
 
 <body>
-    <a href="#main-content" class="skip-link">Pular para o conteúdo</a>
+    <a href="#main-content" class="skip-link" data-i18n="skip">Pular para o conteúdo</a>
 
     <!-- Header -->
     <header class="header">
@@ -272,14 +327,23 @@
                     <span>NexaDuo</span>
                 </a>
                 <ul id="nav-menu" class="nav-menu">
-                    <li><a href="/#home" class="nav-link">Início</a></li>
-                    <li><a href="/#services" class="nav-link">Serviços</a></li>
-                    <li><a href="/#contact" class="nav-link">Contato</a></li>
+                    <li><a href="/#home" class="nav-link" data-i18n="nav.home">Início</a></li>
+                    <li><a href="/#services" class="nav-link" data-i18n="nav.services">Serviços</a></li>
+                    <li><a href="/#contact" class="nav-link" data-i18n="nav.contact">Contato</a></li>
                 </ul>
-                <a href="/#contact" class="nav-cta">Fale Conosco</a>
-                <button class="nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="nav-menu">
-                    <i class="fas fa-bars"></i>
-                </button>
+                <div class="nav-actions">
+                    <div class="lang-switch" role="group" aria-label="Selecionar idioma"
+                        data-i18n-attr="aria-label:lang.aria">
+                        <button type="button" class="lang-btn" data-lang="en" aria-pressed="false"
+                            aria-label="English">EN</button>
+                        <button type="button" class="lang-btn" data-lang="pt" aria-pressed="true"
+                            aria-label="Português">PT</button>
+                    </div>
+                    <a href="/#contact" class="nav-cta" data-i18n="nav.cta">Fale Conosco</a>
+                    <button class="nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="nav-menu">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
             </div>
         </nav>
     </header>
@@ -288,60 +352,60 @@
         <section class="legal-page">
             <div class="container">
                 <div class="legal-header">
-                    <span class="section-tag">Legal</span>
-                    <h1>Política de Privacidade</h1>
-                    <p class="legal-updated">Última atualização: junho de 2026</p>
+                    <span class="section-tag" data-i18n="legal.tag">Legal</span>
+                    <h1 data-i18n="privacy.h1">Política de Privacidade</h1>
+                    <p class="legal-updated" data-i18n="legal.updated">Última atualização: junho de 2026</p>
                 </div>
 
                 <div class="legal-content">
-                    <p>A NexaDuo ("nós", "nosso") está comprometida com a proteção da sua privacidade. Esta política descreve como coletamos, usamos e protegemos as informações obtidas por meio do nosso site <strong>nexaduo.com</strong>.</p>
+                    <p data-i18n="privacy.intro">A NexaDuo ("nós", "nosso") está comprometida com a proteção da sua privacidade. Esta política descreve como coletamos, usamos e protegemos as informações obtidas por meio do nosso site <strong>nexaduo.com</strong>.</p>
 
-                    <h2>1. Informações que coletamos</h2>
-                    <p>Coletamos informações que você nos fornece diretamente, como nome e e-mail ao entrar em contato, e informações coletadas automaticamente, como dados de navegação, endereço IP e tipo de dispositivo.</p>
+                    <h2 data-i18n="privacy.h2_1">1. Informações que coletamos</h2>
+                    <p data-i18n="privacy.p_1">Coletamos informações que você nos fornece diretamente, como nome e e-mail ao entrar em contato, e informações coletadas automaticamente, como dados de navegação, endereço IP e tipo de dispositivo.</p>
 
-                    <h2>2. Uso das informações</h2>
-                    <p>Utilizamos suas informações para:</p>
+                    <h2 data-i18n="privacy.h2_2">2. Uso das informações</h2>
+                    <p data-i18n="privacy.p_2">Utilizamos suas informações para:</p>
                     <ul>
-                        <li>Responder às suas solicitações e fornecer nossos serviços;</li>
-                        <li>Melhorar a experiência de navegação no site;</li>
-                        <li>Enviar comunicações relacionadas aos serviços contratados;</li>
-                        <li>Cumprir obrigações legais e regulatórias.</li>
+                        <li data-i18n="privacy.li_2_1">Responder às suas solicitações e fornecer nossos serviços;</li>
+                        <li data-i18n="privacy.li_2_2">Melhorar a experiência de navegação no site;</li>
+                        <li data-i18n="privacy.li_2_3">Enviar comunicações relacionadas aos serviços contratados;</li>
+                        <li data-i18n="privacy.li_2_4">Cumprir obrigações legais e regulatórias.</li>
                     </ul>
 
-                    <h2>3. Compartilhamento de informações</h2>
-                    <p>Não vendemos nem compartilhamos seus dados pessoais com terceiros para fins comerciais. Podemos compartilhar informações com prestadores de serviços tecnológicos estritamente necessários para a operação do site e dos nossos serviços, mediante acordos de confidencialidade.</p>
+                    <h2 data-i18n="privacy.h2_3">3. Compartilhamento de informações</h2>
+                    <p data-i18n="privacy.p_3">Não vendemos nem compartilhamos seus dados pessoais com terceiros para fins comerciais. Podemos compartilhar informações com prestadores de serviços tecnológicos estritamente necessários para a operação do site e dos nossos serviços, mediante acordos de confidencialidade.</p>
 
-                    <h2>4. Serviços de terceiros</h2>
-                    <p>Nosso site utiliza ferramentas de terceiros para análise e infraestrutura, incluindo serviços da <strong>Google LLC</strong> (Google Cloud, Google Fonts e Google Analytics). O uso dessas ferramentas é regido pelas respectivas políticas de privacidade do Google, disponíveis em <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">policies.google.com/privacy</a>.</p>
+                    <h2 data-i18n="privacy.h2_4">4. Serviços de terceiros</h2>
+                    <p data-i18n="privacy.p_4">Nosso site utiliza ferramentas de terceiros para análise e infraestrutura, incluindo serviços da <strong>Google LLC</strong> (Google Cloud, Google Fonts e Google Analytics). O uso dessas ferramentas é regido pelas respectivas políticas de privacidade do Google, disponíveis em <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">policies.google.com/privacy</a>.</p>
 
-                    <h2>5. Cookies</h2>
-                    <p>Utilizamos cookies e tecnologias semelhantes para melhorar a navegação e analisar o uso do site. Você pode configurar seu navegador para recusar cookies, mas isso pode afetar algumas funcionalidades do site.</p>
+                    <h2 data-i18n="privacy.h2_5">5. Cookies</h2>
+                    <p data-i18n="privacy.p_5">Utilizamos cookies e tecnologias semelhantes para melhorar a navegação e analisar o uso do site. Você pode configurar seu navegador para recusar cookies, mas isso pode afetar algumas funcionalidades do site.</p>
 
-                    <h2>6. Seus direitos (LGPD)</h2>
-                    <p>Nos termos da Lei Geral de Proteção de Dados (Lei nº 13.709/2018), você tem direito a:</p>
+                    <h2 data-i18n="privacy.h2_6">6. Seus direitos (LGPD)</h2>
+                    <p data-i18n="privacy.p_6">Nos termos da Lei Geral de Proteção de Dados (Lei nº 13.709/2018), você tem direito a:</p>
                     <ul>
-                        <li>Confirmar a existência de tratamento de seus dados;</li>
-                        <li>Acessar, corrigir ou excluir seus dados;</li>
-                        <li>Solicitar a portabilidade de seus dados;</li>
-                        <li>Revogar o consentimento previamente concedido.</li>
+                        <li data-i18n="privacy.li_6_1">Confirmar a existência de tratamento de seus dados;</li>
+                        <li data-i18n="privacy.li_6_2">Acessar, corrigir ou excluir seus dados;</li>
+                        <li data-i18n="privacy.li_6_3">Solicitar a portabilidade de seus dados;</li>
+                        <li data-i18n="privacy.li_6_4">Revogar o consentimento previamente concedido.</li>
                     </ul>
-                    <p>Para exercer qualquer um desses direitos, entre em contato pelo e-mail <a href="mailto:contato@nexaduo.com">contato@nexaduo.com</a>.</p>
+                    <p data-i18n="privacy.p_6b">Para exercer qualquer um desses direitos, entre em contato pelo e-mail <a href="mailto:contato@nexaduo.com">contato@nexaduo.com</a>.</p>
 
-                    <h2>7. Segurança</h2>
-                    <p>Adotamos medidas técnicas e organizacionais adequadas para proteger seus dados contra acesso não autorizado, perda ou destruição.</p>
+                    <h2 data-i18n="privacy.h2_7">7. Segurança</h2>
+                    <p data-i18n="privacy.p_7">Adotamos medidas técnicas e organizacionais adequadas para proteger seus dados contra acesso não autorizado, perda ou destruição.</p>
 
-                    <h2>8. Retenção de dados</h2>
-                    <p>Mantemos seus dados apenas pelo tempo necessário para cumprir as finalidades descritas nesta política ou conforme exigido por lei.</p>
+                    <h2 data-i18n="privacy.h2_8">8. Retenção de dados</h2>
+                    <p data-i18n="privacy.p_8">Mantemos seus dados apenas pelo tempo necessário para cumprir as finalidades descritas nesta política ou conforme exigido por lei.</p>
 
-                    <h2>9. Alterações nesta política</h2>
-                    <p>Podemos atualizar esta política periodicamente. A data de "última atualização" no topo desta página indica quando ocorreu a revisão mais recente.</p>
+                    <h2 data-i18n="privacy.h2_9">9. Alterações nesta política</h2>
+                    <p data-i18n="privacy.p_9">Podemos atualizar esta política periodicamente. A data de "última atualização" no topo desta página indica quando ocorreu a revisão mais recente.</p>
 
-                    <h2>10. Contato</h2>
-                    <p>Em caso de dúvidas sobre esta política, entre em contato:</p>
+                    <h2 data-i18n="privacy.h2_10">10. Contato</h2>
+                    <p data-i18n="privacy.p_10">Em caso de dúvidas sobre esta política, entre em contato:</p>
                     <ul>
-                        <li><strong>E-mail:</strong> <a href="mailto:contato@nexaduo.com">contato@nexaduo.com</a></li>
-                        <li><strong>Empresa:</strong> NexaDuo — CNPJ 29.667.108/0001-14</li>
-                        <li><strong>Endereço:</strong> Porto Alegre, RS — Brasil</li>
+                        <li data-i18n="legal.li_email"><strong>E-mail:</strong> <a href="mailto:contato@nexaduo.com">contato@nexaduo.com</a></li>
+                        <li data-i18n="legal.li_company"><strong>Empresa:</strong> NexaDuo — CNPJ 29.667.108/0001-14</li>
+                        <li data-i18n="legal.li_address"><strong>Endereço:</strong> Porto Alegre, RS — Brasil</li>
                     </ul>
                 </div>
             </div>
@@ -360,28 +424,28 @@
                         </picture>
                         <span>NexaDuo</span>
                     </a>
-                    <p>Transformando ideias em soluções tecnológicas inovadoras.</p>
+                    <p data-i18n="footer.tagline">Transformando ideias em soluções tecnológicas inovadoras.</p>
                 </div>
                 <div class="footer-nav">
-                    <h4>Links</h4>
+                    <h4 data-i18n="footer.links">Links</h4>
                     <ul>
-                        <li><a href="/#home">Início</a></li>
-                        <li><a href="/#services">Serviços</a></li>
-                        <li><a href="/#contact">Contato</a></li>
-                        <li><a href="/privacy-policy">Política de Privacidade</a></li>
-                        <li><a href="/terms-of-service">Termos de Uso</a></li>
+                        <li><a href="/#home" data-i18n="nav.home">Início</a></li>
+                        <li><a href="/#services" data-i18n="nav.services">Serviços</a></li>
+                        <li><a href="/#contact" data-i18n="nav.contact">Contato</a></li>
+                        <li><a href="/privacy-policy" data-i18n="footer.privacy">Política de Privacidade</a></li>
+                        <li><a href="/terms-of-service" data-i18n="footer.terms">Termos de Uso</a></li>
                     </ul>
                 </div>
                 <div class="footer-info">
-                    <h4>Contato</h4>
+                    <h4 data-i18n="footer.contact_title">Contato</h4>
                     <p>contato@nexaduo.com</p>
-                    <p>Porto Alegre, RS - Brasil</p>
+                    <p data-i18n="contact.location">Porto Alegre, RS - Brasil</p>
                     <p>CNPJ: 29.667.108/0001-14</p>
                 </div>
             </div>
             <div class="footer-divider"></div>
             <div class="footer-bottom">
-                <p>&copy; 2026 NexaDuo. Todos os direitos reservados.</p>
+                <p data-i18n="footer.copyright">&copy; 2026 NexaDuo. Todos os direitos reservados.</p>
                 <div class="footer-social">
                     <a href="https://www.linkedin.com/company/nexaduo" target="_blank" rel="noopener noreferrer"
                         aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
@@ -392,6 +456,7 @@
         </div>
     </footer>
 
+    <script src="/i18n.js" defer></script>
     <script src="/script.js" defer></script>
 </body>
 

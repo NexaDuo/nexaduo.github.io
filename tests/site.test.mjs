@@ -58,7 +58,7 @@ const browser = await chromium.launch({
 console.log('\n🖥️  DESKTOP (1440x900)');
 console.log('─'.repeat(40));
 
-const desktop = await browser.newPage({ viewport: { width: 1440, height: 900 } });
+const desktop = await browser.newPage({ viewport: { width: 1440, height: 900 }, locale: 'pt-BR' });
 await desktop.goto(BASE, { waitUntil: 'networkidle' });
 
 // Header
@@ -160,7 +160,7 @@ await desktop.close();
 console.log('\n📱 MOBILE (390x844)');
 console.log('─'.repeat(40));
 
-const mobile = await browser.newPage({ viewport: { width: 390, height: 844 } });
+const mobile = await browser.newPage({ viewport: { width: 390, height: 844 }, locale: 'pt-BR' });
 await mobile.goto(BASE, { waitUntil: 'networkidle' });
 
 console.log('\n📌 Header');
@@ -236,7 +236,7 @@ await mobile.close();
 console.log('\n📋 TABLET (768x1024)');
 console.log('─'.repeat(40));
 
-const tablet = await browser.newPage({ viewport: { width: 768, height: 1024 } });
+const tablet = await browser.newPage({ viewport: { width: 768, height: 1024 }, locale: 'pt-BR' });
 await tablet.goto(BASE, { waitUntil: 'networkidle' });
 
 // At exactly 768px, mobile styles kick in
@@ -250,7 +250,7 @@ await tablet.close();
 console.log('\n♿ ACCESSIBILITY');
 console.log('─'.repeat(40));
 
-const a11y = await browser.newPage({ viewport: { width: 1440, height: 900 } });
+const a11y = await browser.newPage({ viewport: { width: 1440, height: 900 }, locale: 'pt-BR' });
 await a11y.goto(BASE, { waitUntil: 'networkidle' });
 
 // Skip link
@@ -285,7 +285,7 @@ await a11y.close();
 console.log('\n⚡ PERFORMANCE');
 console.log('─'.repeat(40));
 
-const perf = await browser.newPage({ viewport: { width: 1440, height: 900 } });
+const perf = await browser.newPage({ viewport: { width: 1440, height: 900 }, locale: 'pt-BR' });
 const perfResponse = await perf.goto(BASE, { waitUntil: 'networkidle' });
 
 assert(perfResponse.status() === 200, 'Page loads with 200 OK');
@@ -311,6 +311,68 @@ const lazyImgs = await perf.locator('img[loading="lazy"]').count();
 assert(lazyImgs >= 1, `Lazy-loaded images (${lazyImgs})`);
 
 await perf.close();
+
+// =============================================
+// I18N (EN + PT-BR)
+// =============================================
+console.log('\n🌐 I18N (EN + PT-BR)');
+console.log('─'.repeat(40));
+
+// (1) An en-US browser context loads in English
+const enCtx = await browser.newContext({ viewport: { width: 1440, height: 900 }, locale: 'en-US' });
+const enPage = await enCtx.newPage();
+await enPage.goto(BASE, { waitUntil: 'networkidle' });
+
+let htmlLang = await enPage.evaluate(() => document.documentElement.lang);
+assert(htmlLang === 'en', `en-US visitor auto-detects English (<html lang="${htmlLang}">)`);
+
+let firstLink = (await enPage.locator('.nav-menu .nav-link').first().textContent()).trim();
+assert(firstLink === 'Home', `Nav rendered in EN (first link "${firstLink}")`);
+
+let enPressed = await enPage.locator('.lang-btn[data-lang="en"]').getAttribute('aria-pressed');
+assert(enPressed === 'true', 'EN selector marked active for en-US visitor');
+
+const enTitle = await enPage.title();
+assert(enTitle.includes('Innovative Technology'), `<title> translated to EN ("${enTitle}")`);
+
+// (2) Clicking the toggle switches to PT-BR and updates <html lang> (no reload)
+await enPage.locator('.lang-btn[data-lang="pt"]').click();
+await enPage.waitForTimeout(100);
+
+htmlLang = await enPage.evaluate(() => document.documentElement.lang);
+assert(htmlLang === 'pt-BR', `Toggle switches <html lang> to pt-BR ("${htmlLang}")`);
+
+firstLink = (await enPage.locator('.nav-menu .nav-link').first().textContent()).trim();
+assert(firstLink === 'Início', `Content switched to PT instantly without reload ("${firstLink}")`);
+
+// (3) Reload preserves the manual choice via localStorage (over auto-detection)
+await enPage.reload({ waitUntil: 'networkidle' });
+
+htmlLang = await enPage.evaluate(() => document.documentElement.lang);
+assert(htmlLang === 'pt-BR', 'Manual PT choice persists after reload (localStorage beats en-US detection)');
+
+const stored = await enPage.evaluate(() => localStorage.getItem('nexaduo-lang'));
+assert(stored === 'pt', `Choice persisted in localStorage ("${stored}")`);
+
+firstLink = (await enPage.locator('.nav-menu .nav-link').first().textContent()).trim();
+assert(firstLink === 'Início', `PT content restored after reload ("${firstLink}")`);
+await enCtx.close();
+
+// (4) An unknown locale falls back to PT-BR
+const xxCtx = await browser.newContext({ viewport: { width: 1440, height: 900 }, locale: 'fr-FR' });
+const xxPage = await xxCtx.newPage();
+await xxPage.goto(BASE, { waitUntil: 'networkidle' });
+
+htmlLang = await xxPage.evaluate(() => document.documentElement.lang);
+assert(htmlLang === 'pt-BR', `Unknown locale (fr-FR) falls back to PT-BR ("${htmlLang}")`);
+
+firstLink = (await xxPage.locator('.nav-menu .nav-link').first().textContent()).trim();
+assert(firstLink === 'Início', `Fallback content is PT ("${firstLink}")`);
+
+let ptPressed = await xxPage.locator('.lang-btn[data-lang="pt"]').getAttribute('aria-pressed');
+assert(ptPressed === 'true', 'PT selector marked active on fallback');
+await xxCtx.close();
+
 await browser.close();
 server.close();
 
