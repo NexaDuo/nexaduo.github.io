@@ -95,6 +95,29 @@ assert(await navLinks.count() === 3, '3 nav links present');
 assert(await desktop.locator('.nav-cta').isVisible(), 'CTA button visible');
 assert(await desktop.locator('.nav-toggle').isHidden(), 'Hamburger hidden on desktop');
 
+// CTA hover must not jump/shift vertically (regression for #7: .nav-cta:hover
+// used transform: translateY(-1px) which made the button visibly jump).
+const ctaHover = desktop.locator('.nav-cta');
+const langBefore = await desktop.locator('.lang-switch').boundingBox().catch(() => null);
+const ctaBefore = await ctaHover.boundingBox();
+await ctaHover.hover();
+await desktop.waitForTimeout(300);
+const ctaAfter = await ctaHover.boundingBox();
+const langAfter = await desktop.locator('.lang-switch').boundingBox().catch(() => null);
+const ctaDeltaY = Math.abs(ctaAfter.y - ctaBefore.y);
+assert(ctaDeltaY <= 0.5, `CTA does not jump vertically on hover (Δy=${ctaDeltaY.toFixed(2)}px)`);
+if (langBefore && langAfter) {
+    const langDeltaY = Math.abs(langAfter.y - langBefore.y);
+    assert(langDeltaY <= 0.5, `Language switch neighbor does not shift when CTA hovered (Δy=${langDeltaY.toFixed(2)}px)`);
+}
+const ctaHoverTransform = await ctaHover.evaluate(el => getComputedStyle(el).transform);
+assert(ctaHoverTransform === 'none' || /matrix\(1, 0, 0, 1, 0, 0\)/.test(ctaHoverTransform),
+    `CTA hover has no vertical transform (${ctaHoverTransform})`);
+const ctaHoverShadow = await ctaHover.evaluate(el => getComputedStyle(el).boxShadow);
+assert(ctaHoverShadow !== 'none', `CTA keeps a hover feedback shadow (${ctaHoverShadow})`);
+// Move mouse off the CTA so it does not interfere with later interactions.
+await desktop.mouse.move(0, 0);
+
 // Smooth scroll + no hash
 console.log('\n📜 Scroll & URL');
 await desktop.locator('.nav-link', { hasText: 'Serviços' }).click();
