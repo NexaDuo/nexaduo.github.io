@@ -207,10 +207,18 @@ a {
     text-decoration: none;
 }
 
+/* The logo <img> is wrapped in a <picture>; display:contents removes the
+   picture box from layout so the <img> is the direct flex child of
+   .nav-brand and align-items:center centers it against the text. */
+.nav-brand picture {
+    display: contents;
+}
+
 .nav-brand img {
     width: 36px;
     height: 36px;
     object-fit: contain;
+    display: block;
 }
 
 .nav-brand span {

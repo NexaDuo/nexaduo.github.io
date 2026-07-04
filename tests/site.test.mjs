@@ -79,6 +79,15 @@ assert(borderRadius === '100px', `Pill has rounded shape (${borderRadius})`);
 const backdropFilter = await pill.evaluate(el => getComputedStyle(el).backdropFilter);
 assert(backdropFilter.includes('blur'), `Glass effect active (${backdropFilter})`);
 
+// Brand logo/text vertical alignment (regression for #5: <picture> wrapper
+// broke .nav-brand flex centering so the logo sat above the text).
+const brandImgBox = await desktop.locator('.nav-container .nav-brand img').first().boundingBox();
+const brandSpanBox = await desktop.locator('.nav-container .nav-brand span').first().boundingBox();
+const brandDeltaDesktop = Math.abs(
+    (brandImgBox.y + brandImgBox.height / 2) - (brandSpanBox.y + brandSpanBox.height / 2)
+);
+assert(brandDeltaDesktop <= 1.5, `Logo & "NexaDuo" text share vertical center on desktop (Δ=${brandDeltaDesktop.toFixed(2)}px)`);
+
 // Nav links
 console.log('\n🔗 Navigation');
 const navLinks = desktop.locator('.nav-menu .nav-link');
@@ -172,6 +181,14 @@ const mobileBackdrop = await mobile.locator('.nav-container').evaluate(
     el => getComputedStyle(el).backdropFilter
 );
 assert(mobileBackdrop === 'none', `Backdrop-filter removed on mobile (${mobileBackdrop})`);
+
+// Brand logo/text vertical alignment on mobile (regression for #5)
+const mBrandImgBox = await mobile.locator('.nav-container .nav-brand img').first().boundingBox();
+const mBrandSpanBox = await mobile.locator('.nav-container .nav-brand span').first().boundingBox();
+const brandDeltaMobile = Math.abs(
+    (mBrandImgBox.y + mBrandImgBox.height / 2) - (mBrandSpanBox.y + mBrandSpanBox.height / 2)
+);
+assert(brandDeltaMobile <= 1.5, `Logo & "NexaDuo" text share vertical center on mobile (Δ=${brandDeltaMobile.toFixed(2)}px)`);
 
 // Code window hidden on mobile
 assert(await mobile.locator('.hero-visual').isHidden(), 'Code window hidden on mobile');
