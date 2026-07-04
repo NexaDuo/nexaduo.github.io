@@ -26,7 +26,8 @@
     <meta property="og:description" data-i18n-attr="content:og.description"
         content="Desenvolvemos software personalizado e oferecemos consultoria tecnológica para impulsionar o crescimento do seu negócio.">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://nexaduo.com">
+    <meta property="og:url" content="https://nexaduo.com/">
+    <link rel="canonical" href="https://nexaduo.com/">
 
     <!-- Preconnect -->
     <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
@@ -42,6 +43,18 @@
 
     <!-- Critical CSS -->
     <style>
+        /* Critical subset of the design tokens in styles.css. Keep these values
+           in sync with :root in styles.css so the inline critical CSS and the
+           full stylesheet do not diverge. */
+        :root {
+            --bg-primary: #030712;
+            --accent: #4f46e5;
+            --accent-hover: #5b52f0;
+            --text-primary: #f8fafc;
+            --text-body: #e2e8f0;
+            --text-secondary: #94a3b8;
+        }
+
         @font-face {
             font-family: 'Inter Fallback';
             src: local('Arial');
@@ -65,8 +78,8 @@
 
         body {
             font-family: 'Inter', 'Inter Fallback', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            color: #e2e8f0;
-            background: #030712;
+            color: var(--text-body);
+            background: var(--bg-primary);
             line-height: 1.6;
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
@@ -142,7 +155,7 @@
         .nav-brand span {
             font-size: 1.25rem;
             font-weight: 700;
-            color: #f8fafc;
+            color: var(--text-primary);
         }
 
         .nav-menu {
@@ -170,7 +183,7 @@
             display: inline-flex;
             align-items: center;
             padding: 8px 18px;
-            background: #4f46e5;
+            background: var(--accent);
             color: #fff;
             font-size: 0.8125rem;
             font-weight: 600;
@@ -180,14 +193,14 @@
         }
 
         .nav-cta:hover {
-            background: #5b52f0;
+            background: var(--accent-hover);
             box-shadow: 0 4px 14px rgba(79, 70, 229, 0.35);
         }
 
         .nav-toggle {
             display: none;
-            width: 40px;
-            height: 40px;
+            width: 44px;
+            height: 44px;
             border-radius: 50%;
             background: rgba(255, 255, 255, 0.06);
             border: none;
@@ -213,6 +226,10 @@
         }
 
         .lang-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 24px;
             border: none;
             background: transparent;
             color: rgba(255, 255, 255, 0.6);
@@ -220,7 +237,7 @@
             font-size: 0.75rem;
             font-weight: 600;
             line-height: 1;
-            padding: 5px 10px;
+            padding: 6px 12px;
             border-radius: 100px;
             cursor: pointer;
             transition: color 0.2s, background 0.2s;
@@ -232,7 +249,7 @@
 
         .lang-btn.active,
         .lang-btn[aria-pressed="true"] {
-            background: #4f46e5;
+            background: var(--accent);
             color: #fff;
         }
 
@@ -392,6 +409,12 @@
             .nav-menu.active {
                 opacity: 1;
                 visibility: visible;
+            }
+
+            /* Keep the logo above the full-screen menu overlay (z-index 999). */
+            body.menu-open .nav-brand {
+                position: relative;
+                z-index: 1001;
             }
 
             .nav-link {
