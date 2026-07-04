@@ -230,6 +230,23 @@ assert(menuBox && menuBox.height >= 800, `Menu covers full height (${Math.round(
 
 await mobile.screenshot({ path: '/tmp/pw-mobile-menu.png' });
 
+// Logo stays above the menu overlay (regression for audit #10.1: the logo was
+// hidden behind the full-screen .nav-menu overlay when the menu was open).
+const brandVisibleOpen = await mobile.locator('.nav-container .nav-brand').isVisible();
+assert(brandVisibleOpen, 'Logo visible while mobile menu is open');
+const brandZ = await mobile.locator('.nav-container .nav-brand').evaluate(el => {
+    const cs = getComputedStyle(el);
+    return { z: parseInt(cs.zIndex, 10), pos: cs.position };
+});
+assert(brandZ.z >= 1000 && brandZ.pos !== 'static',
+    `Logo stacks above overlay when menu open (z-index ${brandZ.z}, position ${brandZ.pos})`);
+const brandOnTop = await mobile.locator('.nav-container .nav-brand').evaluate(el => {
+    const r = el.getBoundingClientRect();
+    const hit = document.elementFromPoint(r.left + r.width / 2, r.top + r.height / 2);
+    return !!(hit && hit.closest('.nav-brand'));
+});
+assert(brandOnTop, 'Logo is the top hit-target (not covered by menu overlay)');
+
 // aria-expanded
 const expanded = await mobile.locator('.nav-toggle').getAttribute('aria-expanded');
 assert(expanded === 'true', `aria-expanded is true when open`);
@@ -317,7 +334,23 @@ assert(imgsWithoutAlt === 0, 'All images have alt text');
 const socialNoLabel = await a11y.locator('.social-link:not([aria-label])').count();
 assert(socialNoLabel === 0, 'All social links have aria-label');
 
+// Tap target sizes (regression for audit #10.2/#10.3: WCAG 2.5.8 min 24x24).
+const langBtnBox = await a11y.locator('.lang-btn').first().boundingBox();
+assert(langBtnBox && langBtnBox.height >= 24,
+    `Language button meets min tap height (${Math.round(langBtnBox?.height)}px >= 24)`);
+const socialBox = await a11y.locator('.social-link').first().boundingBox();
+assert(socialBox && socialBox.width >= 44 && socialBox.height >= 44,
+    `Social link is >= 44x44 (${Math.round(socialBox?.width)}x${Math.round(socialBox?.height)})`);
+
 await a11y.close();
+
+// nav-toggle tap size is measured on mobile where it is displayed.
+const a11yToggle = await browser.newPage({ viewport: { width: 390, height: 844 }, locale: 'pt-BR' });
+await a11yToggle.goto(BASE, { waitUntil: 'networkidle' });
+const toggleBox = await a11yToggle.locator('.nav-toggle').boundingBox();
+assert(toggleBox && toggleBox.width >= 44 && toggleBox.height >= 44,
+    `Hamburger toggle is >= 44x44 (${Math.round(toggleBox?.width)}x${Math.round(toggleBox?.height)})`);
+await a11yToggle.close();
 
 // =============================================
 // PERFORMANCE
@@ -412,6 +445,29 @@ assert(firstLink === 'Início', `Fallback content is PT ("${firstLink}")`);
 let ptPressed = await xxPage.locator('.lang-btn[data-lang="pt"]').getAttribute('aria-pressed');
 assert(ptPressed === 'true', 'PT selector marked active on fallback');
 await xxCtx.close();
+
+// =============================================
+// SEO — canonical / og:url on index + legal pages
+// =============================================
+console.log('\n🔎 SEO (canonical & og:url)');
+console.log('─'.repeat(40));
+
+const seoCases = [
+    { path: '/index.html', url: 'https://nexaduo.com/' },
+    { path: '/privacy-policy/index.html', url: 'https://nexaduo.com/privacy-policy/' },
+    { path: '/terms-of-service/index.html', url: 'https://nexaduo.com/terms-of-service/' },
+];
+const seoPage = await browser.newPage({ viewport: { width: 1440, height: 900 }, locale: 'pt-BR' });
+for (const { path, url } of seoCases) {
+    await seoPage.goto(BASE + path, { waitUntil: 'domcontentloaded' });
+    const ogUrl = await seoPage.locator('meta[property="og:url"]').getAttribute('content');
+    const canonical = await seoPage.locator('link[rel="canonical"]').getAttribute('content').catch(() => null)
+        || await seoPage.locator('link[rel="canonical"]').getAttribute('href');
+    assert(ogUrl === url, `${path} og:url is directory URL (${ogUrl})`);
+    assert(canonical === url, `${path} canonical matches directory URL (${canonical})`);
+    assert(!/\.html/.test(ogUrl || ''), `${path} og:url has no .html`);
+}
+await seoPage.close();
 
 await browser.close();
 server.close();
