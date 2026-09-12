@@ -91,7 +91,7 @@ assert(brandDeltaDesktop <= 1.5, `Logo & "NexaDuo" text share vertical center on
 // Nav links
 console.log('\n🔗 Navigation');
 const navLinks = desktop.locator('.nav-menu .nav-link');
-assert(await navLinks.count() === 3, '3 nav links present');
+assert(await navLinks.count() === 4, '4 nav links present');
 assert(await desktop.locator('.nav-cta').isVisible(), 'CTA button visible');
 assert(await desktop.locator('.nav-toggle').isHidden(), 'Hamburger hidden on desktop');
 
@@ -324,7 +324,7 @@ const h1Count = await a11y.locator('h1').count();
 assert(h1Count === 1, 'Single H1 on page');
 
 const h2Count = await a11y.locator('h2').count();
-assert(h2Count === 2, `2 H2 sections: services + contact (found ${h2Count})`);
+assert(h2Count === 3, `3 H2 sections: services + projects + contact (found ${h2Count})`);
 
 // Alt text on images
 const imgsWithoutAlt = await a11y.locator('img:not([alt])').count();
