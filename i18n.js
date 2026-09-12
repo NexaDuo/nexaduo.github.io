@@ -37,6 +37,7 @@
             'skip': 'Pular para o conteúdo',
             'nav.home': 'Início',
             'nav.services': 'Serviços',
+            'nav.projects': 'Projetos',
             'nav.contact': 'Contato',
             'nav.cta': 'Fale Conosco',
             'footer.tagline': 'Transformando ideias em soluções tecnológicas inovadoras.',
@@ -80,6 +81,19 @@
             'service1.item4': 'Otimização de Performance',
             'service2.title': 'Dados &amp; Analytics',
             'service2.desc': 'Transformamos seus dados em insights valiosos através de dashboards e análises avançadas.',
+            'service2.item1': 'Business Intelligence',
+            'service2.item2': 'Data Visualization',
+            'service2.item3': 'Machine Learning',
+            'service2.item4': 'Big Data Solutions',
+
+            // Home - projects
+            'projects.tag': 'Projetos',
+            'projects.title': 'Nosso Trabalho',
+            'projects.desc': 'Conheça algumas das soluções inovadoras que desenvolvemos.',
+            'project.marc.title': 'mARC (Multi-Agent Relay Control)',
+            'project.marc.desc': 'Uma equipe de agentes de IA operando como especialistas em um console estilo IRC. Construído sobre Claude Code, Google Antigravity e Copilot CLI. Automatiza o desenvolvimento de ponta a ponta.',
+            'project.repo': 'Repositório',
+            'project.visit': 'Visitar Site',
 
             // Home - contact
             'contact.tag': 'Contato',
@@ -164,6 +178,7 @@
             'skip': 'Skip to content',
             'nav.home': 'Home',
             'nav.services': 'Services',
+            'nav.projects': 'Projects',
             'nav.contact': 'Contact',
             'nav.cta': 'Get in Touch',
             'footer.tagline': 'Turning ideas into innovative technology solutions.',
@@ -181,7 +196,7 @@
             // Home - hero
             'hero.badge': 'Innovation &amp; Technology',
             'hero.title': 'We turn <span class="gradient-text">ideas</span> into <span class="gradient-text">technology solutions</span>',
-            'hero.desc': 'We develop custom software and provide technology consulting to drive your business growth in the digital world.',
+            'hero.desc': 'We engineer robust platforms, AI-driven agents, and scalable cloud infrastructure to accelerate your digital delivery.',
             'hero.cta_secondary': 'Our Services',
 
             // Home - code window
@@ -198,15 +213,28 @@
             // Home - services
             'services.tag': 'Services',
             'services.title': 'Complete solutions for your business',
-            'services.desc': 'We combine technical expertise with strategic vision to deliver results that make a difference.',
-            'service1.title': 'Technology Consulting',
-            'service1.desc': 'We guide your company in choosing the best technologies and digital strategies.',
-            'service1.item1': 'Architecture Analysis',
-            'service1.item2': 'Code Audit',
-            'service1.item3': 'Strategic Planning',
-            'service1.item4': 'Performance Optimization',
-            'service2.title': 'Data &amp; Analytics',
-            'service2.desc': 'We turn your data into valuable insights through dashboards and advanced analytics.',
+            'services.desc': 'We combine deep platform engineering expertise with agentic AI workflows to deliver end-to-end results.',
+            'service1.title': 'Platform & Infrastructure',
+            'service1.desc': 'We architect scalable, reliable cloud infrastructure and robust CI/CD pipelines.',
+            'service1.item1': 'Cloud Architecture (AWS)',
+            'service1.item2': 'Reliability & Observability',
+            'service1.item3': 'Event-Driven Systems',
+            'service1.item4': 'Kubernetes & Docker',
+            'service2.title': 'AI &amp; Agentic Systems',
+            'service2.desc': 'We build autonomous AI agents, LLM gateways, and intelligent workflows for modern engineering teams.',
+            'service2.item1': 'Agentic Workflows (mARC)',
+            'service2.item2': 'LLM Gateways',
+            'service2.item3': 'RAG Pipelines',
+            'service2.item4': 'Prompt Engineering',
+
+            // Home - projects
+            'projects.tag': 'Projects',
+            'projects.title': 'Featured Work',
+            'projects.desc': 'A look at the platforms and AI systems we build.',
+            'project.marc.title': 'mARC (Multi-Agent Relay Control)',
+            'project.marc.desc': 'An AI agent team operating as specialists in an IRC-style console. Built on Claude Code, Google Antigravity, and Copilot CLI. Automates end-to-end development with defined @dev, @sre, @design, @sec, and @rev roles.',
+            'project.repo': 'Repository',
+            'project.visit': 'Visit Site',
 
             // Home - contact
             'contact.tag': 'Contact',
