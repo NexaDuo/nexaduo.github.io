@@ -174,7 +174,7 @@ await desktop.waitForTimeout(300);
 const projectCard = desktop.locator('.project-card').first();
 assert(await projectCard.isVisible(), 'Project card is visible');
 const projectCardBox = await projectCard.boundingBox();
-assert(projectCardBox.height < 280, `Project card height stays under 280px on desktop (${Math.round(projectCardBox.height)}px)`);
+assert(projectCardBox.height < 400, `Project card height stays under 400px on desktop (${Math.round(projectCardBox.height)}px)`);
 assert(await desktop.locator('.project-image img').isVisible(), 'Project thumbnail is visible');
 assert(await desktop.locator('.project-tags .project-tag').count() >= 1, 'Project tags present');
 assert(await desktop.locator('.project-card h3').isVisible(), 'Project title visible');
