@@ -175,11 +175,11 @@ const projectCard = desktop.locator('.project-card').first();
 assert(await projectCard.isVisible(), 'Project card is visible');
 const projectCardBox = await projectCard.boundingBox();
 assert(projectCardBox.height < 400, `Project card height stays under 400px on desktop (${Math.round(projectCardBox.height)}px)`);
-assert(await desktop.locator('.project-image img').isVisible(), 'Project thumbnail is visible');
-assert(await desktop.locator('.project-tags .project-tag').count() >= 1, 'Project tags present');
-assert(await desktop.locator('.project-card h3').isVisible(), 'Project title visible');
-assert(await desktop.locator('.project-card p').isVisible(), 'Project description visible');
-const projectLinks = desktop.locator('.project-links .btn');
+assert(await projectCard.locator('.project-image img').isVisible(), 'Project thumbnail is visible');
+assert(await projectCard.locator('.project-tag').count() >= 1, 'Project tags present');
+assert(await projectCard.locator('h3').isVisible(), 'Project title visible');
+assert(await projectCard.locator('p').isVisible(), 'Project description visible');
+const projectLinks = projectCard.locator('.project-links .btn');
 assert(await projectLinks.count() === 2, '2 project links (repo + visit) present');
 
 // Contact section
@@ -307,7 +307,7 @@ await mobile.locator('#projects').scrollIntoViewIfNeeded();
 await mobile.waitForTimeout(300);
 const mobileCardBox = await mobile.locator('.project-card').first().boundingBox();
 assert(mobileCardBox.width <= 390, `Project card does not overflow mobile viewport (${Math.round(mobileCardBox.width)}px)`);
-assert(await mobile.locator('.project-links .btn').count() === 2, '2 project links present on mobile');
+assert(await mobile.locator('.project-card').first().locator('.project-links .btn').count() === 2, '2 project links present on mobile');
 
 await mobile.screenshot({ path: '/tmp/pw-mobile.png' });
 await mobile.close();

@@ -92,6 +92,8 @@
             'projects.desc': 'Uma visão das plataformas e sistemas de IA que construímos.',
             'project.marc.title': 'mARC (Multi-Agent Relay Control)',
             'project.marc.desc': 'Uma equipe de agentes de IA operando como especialistas em um console estilo IRC. Construído sobre Claude Code, Google Antigravity e Copilot CLI. Automatiza o desenvolvimento de ponta a ponta com papéis definidos: @dev, @sre, @design, @sec e @rev.',
+            'project.audio_blackbox.title': 'Audio Blackbox',
+            'project.audio_blackbox.desc': 'Um gravador de áudio de memória contínua para Android que mantém uma janela rolante de áudio e salva no armazenamento apenas quando você pede.',
             'project.repo': 'Repositório',
             'project.visit': 'Visitar Site',
 
@@ -233,6 +235,8 @@
             'projects.desc': 'A look at the platforms and AI systems we build.',
             'project.marc.title': 'mARC (Multi-Agent Relay Control)',
             'project.marc.desc': 'An AI agent team operating as specialists in an IRC-style console. Built on Claude Code, Google Antigravity, and Copilot CLI. Automates end-to-end development with defined @dev, @sre, @design, @sec, and @rev roles.',
+            'project.audio_blackbox.title': 'Audio Blackbox',
+            'project.audio_blackbox.desc': 'A continuous memory audio recorder for Android that keeps a rolling window of audio and writes to storage only when explicitly requested.',
             'project.repo': 'Repository',
             'project.visit': 'Visit Site',
 
