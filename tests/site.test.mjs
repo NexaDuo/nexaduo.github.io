@@ -164,6 +164,24 @@ await desktop.waitForTimeout(800);
 const animated = await cards.first().evaluate(el => el.classList.contains('visible'));
 assert(animated, 'Service cards animate on scroll (reveal)');
 
+// Projects section
+console.log('\n📁 Projects');
+await desktop.locator('#projects').scrollIntoViewIfNeeded();
+await desktop.waitForTimeout(300);
+// Regression for #16: single mARC project card rendered ~675px tall on
+// desktop because a full-width 16/9 thumbnail stretched the whole grid
+// column. Card must now stay compact.
+const projectCard = desktop.locator('.project-card').first();
+assert(await projectCard.isVisible(), 'Project card is visible');
+const projectCardBox = await projectCard.boundingBox();
+assert(projectCardBox.height < 280, `Project card height stays under 280px on desktop (${Math.round(projectCardBox.height)}px)`);
+assert(await desktop.locator('.project-image img').isVisible(), 'Project thumbnail is visible');
+assert(await desktop.locator('.project-tags .project-tag').count() >= 1, 'Project tags present');
+assert(await desktop.locator('.project-card h3').isVisible(), 'Project title visible');
+assert(await desktop.locator('.project-card p').isVisible(), 'Project description visible');
+const projectLinks = desktop.locator('.project-links .btn');
+assert(await projectLinks.count() === 2, '2 project links (repo + visit) present');
+
 // Contact section
 console.log('\n📞 Contact');
 await desktop.locator('#contact').scrollIntoViewIfNeeded();
@@ -283,6 +301,13 @@ await mobile.locator('.nav-toggle').click();
 await mobile.waitForTimeout(300);
 const bodyOverflow2 = await mobile.evaluate(() => getComputedStyle(document.body).overflow);
 assert(bodyOverflow2 !== 'hidden', 'Body scroll unlocked when menu closed');
+
+// Project card stays legible on mobile (no horizontal overflow, stacked layout)
+await mobile.locator('#projects').scrollIntoViewIfNeeded();
+await mobile.waitForTimeout(300);
+const mobileCardBox = await mobile.locator('.project-card').first().boundingBox();
+assert(mobileCardBox.width <= 390, `Project card does not overflow mobile viewport (${Math.round(mobileCardBox.width)}px)`);
+assert(await mobile.locator('.project-links .btn').count() === 2, '2 project links present on mobile');
 
 await mobile.screenshot({ path: '/tmp/pw-mobile.png' });
 await mobile.close();
