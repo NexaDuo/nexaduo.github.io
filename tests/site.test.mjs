@@ -1,7 +1,7 @@
 import { chromium } from 'playwright';
 import { createServer } from 'http';
 import { readFile } from 'fs/promises';
-import { join, extname } from 'path';
+import { join, extname, sep } from 'path';
 import { fileURLToPath } from 'url';
 
 const PORT = 8080;
@@ -15,7 +15,12 @@ const MIME = {
 };
 
 const server = createServer(async (req, res) => {
-    const filePath = join(ROOT, req.url === '/' ? 'index.html' : req.url);
+    const path = req.url.split('?')[0];
+    const filePath = join(ROOT, path === '/' ? 'index.html' : path);
+    if (filePath !== ROOT && !filePath.startsWith(ROOT + sep)) {
+        res.writeHead(403);
+        return res.end();
+    }
     try {
         const data = await readFile(filePath);
         res.writeHead(200, { 'Content-Type': MIME[extname(filePath)] || 'application/octet-stream' });
@@ -26,7 +31,7 @@ const server = createServer(async (req, res) => {
     }
 });
 
-await new Promise(resolve => server.listen(PORT, resolve));
+await new Promise(resolve => server.listen(PORT, '127.0.0.1', resolve));
 console.log(`Server running on http://localhost:${PORT}`);
 
 const BASE = `http://localhost:${PORT}`;
@@ -163,6 +168,13 @@ await desktop.locator('#services').scrollIntoViewIfNeeded();
 await desktop.waitForTimeout(800);
 const animated = await cards.first().evaluate(el => el.classList.contains('visible'));
 assert(animated, 'Service cards animate on scroll (reveal)');
+
+// Cache busting: a stale styles.css with a new index.html left the
+// products lists unstyled for returning visitors right after a deploy.
+const unversioned = await desktop.evaluate(() => [
+    ...document.querySelectorAll('link[href$=".css"], script[src$=".js"]'),
+].map(el => el.getAttribute('href') || el.getAttribute('src')).filter(u => !/^https?:/.test(u)));
+assert(unversioned.length === 0, `Local CSS/JS carry a ?v= version (${unversioned.join(', ') || 'all versioned'})`);
 
 // Products section
 console.log('\n📦 Products');
