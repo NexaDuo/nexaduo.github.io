@@ -485,7 +485,7 @@
                 <ul id="nav-menu" class="nav-menu">
                     <li><a href="#home" class="nav-link" data-i18n="nav.home">Início</a></li>
                     <li><a href="#services" class="nav-link" data-i18n="nav.services">Serviços</a></li>
-                    <li><a href="#projects" class="nav-link" data-i18n="nav.projects">Projetos</a></li>
+                    <li><a href="#products" class="nav-link" data-i18n="nav.products">Produtos</a></li>
                     <li><a href="#contact" class="nav-link" data-i18n="nav.contact">Contato</a></li>
                 </ul>
                 <div class="nav-actions">
@@ -602,65 +602,97 @@
             </div>
         </section>
 
-        <!-- Projects -->
-        <section id="projects" class="projects">
+        <!-- Products -->
+        <section id="products" class="products">
             <div class="container">
                 <div class="section-header reveal">
-                    <span class="section-tag" data-i18n="projects.tag">Projetos</span>
-                    <h2 class="section-title" data-i18n="projects.title">Nosso Trabalho</h2>
-                    <p class="section-desc" data-i18n="projects.desc">
-                        Conheça algumas das soluções inovadoras que desenvolvemos.
+                    <h2 class="section-title" data-i18n="products.title">Produtos</h2>
+                    <p class="section-desc" data-i18n="products.desc">
+                        Software que construímos, mantemos e usamos no dia a dia.
                     </p>
                 </div>
-                <div class="projects-grid">
-                    <article class="project-card reveal">
-                        <div class="project-image">
-                            <img src="assets/marc-og-image.png" alt="mARC (Multi-Agent Relay Control)" loading="lazy">
+
+                <article class="product-featured reveal">
+                    <div class="product-featured-stage">
+                        <img class="product-featured-screen" src="assets/vaelo-screen.webp" width="540" height="1080" loading="lazy"
+                            alt="Tela do Vaelo: grupo Viagem para Paraty com saldo a receber e botões de despesa, acerto e convite"
+                            data-i18n-attr="alt:product.vaelo.screen_alt">
+                    </div>
+                    <div class="product-featured-body">
+                        <p class="product-status">
+                            <span class="product-status-dot" aria-hidden="true"></span>
+                            <span data-i18n="product.vaelo.status">Disponível na web · Android e iPhone em breve</span>
+                        </p>
+                        <h3 class="product-name">
+                            <img src="assets/vaelo-icon.png" alt="" width="40" height="40" loading="lazy">
+                            <span>Vaelo</span>
+                        </h3>
+                        <p class="product-pitch" data-i18n="product.vaelo.pitch">Despesas em grupo, sem entregar seus dados.</p>
+                        <p class="product-desc" data-i18n="product.vaelo.desc">
+                            O app para dividir as contas da viagem, da casa ou dos amigos. Os lançamentos ficam nos aparelhos e só viajam cifrados de ponta a ponta.
+                        </p>
+                        <ul class="product-points">
+                            <li><i class="fas fa-lock" aria-hidden="true"></i><span data-i18n="product.vaelo.point1">Cifrado de ponta a ponta: o servidor só repassa dados que não consegue ler</span></li>
+                            <li><i class="fas fa-wifi" aria-hidden="true"></i><span data-i18n="product.vaelo.point2">Funciona sem internet e sincroniza quando a conexão volta</span></li>
+                            <li><i class="fas fa-scale-balanced" aria-hidden="true"></i><span data-i18n="product.vaelo.point3">Partes iguais, valores exatos, porcentagem ou cotas, com correção pelo IPCA</span></li>
+                        </ul>
+                        <div class="product-links">
+                            <a href="https://app.vaelo.club" target="_blank" rel="noopener noreferrer" class="btn btn-vaelo">
+                                <span data-i18n="product.vaelo.open">Usar no navegador</span> <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                            </a>
+                            <a href="https://vaelo.club" target="_blank" rel="noopener noreferrer" class="btn btn-ghost">
+                                <span data-i18n="product.vaelo.site">Conhecer o Vaelo</span>
+                            </a>
                         </div>
-                        <div class="project-content">
-                            <div class="project-tags">
-                                <span class="project-tag">AI/Agentic</span>
-                                <span class="project-tag">TypeScript</span>
-                                <span class="project-tag">Claude Code</span>
-                            </div>
-                            <h3 data-i18n="project.marc.title">mARC (Multi-Agent Relay Control)</h3>
-                            <p data-i18n="project.marc.desc">
-                                Uma equipe de agentes de IA operando como especialistas em um console estilo IRC. Construído sobre Claude Code, Google Antigravity e Copilot CLI. Automatiza o desenvolvimento de ponta a ponta.
-                            </p>
-                            <div class="project-links">
-                                <a href="https://github.com/NexaDuo/mARC" target="_blank" rel="noopener noreferrer" class="btn btn-ghost">
-                                    <i class="fab fa-github"></i> <span data-i18n="project.repo">Repositório</span>
-                                </a>
-                                <a href="https://marc.nexaduo.com" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
-                                    <i class="fas fa-external-link-alt"></i> <span data-i18n="project.visit">Visitar Site</span>
-                                </a>
-                            </div>
+                    </div>
+                </article>
+
+                <article class="product-card reveal">
+                    <div class="product-card-media">
+                        <img src="assets/marc-og-image.png" alt="" loading="lazy">
+                    </div>
+                    <div class="product-card-body">
+                        <div class="project-tags">
+                            <span class="project-tag">AI/Agentic</span>
+                            <span class="project-tag">Claude Code</span>
+                            <span class="project-tag">Open source</span>
                         </div>
-                    </article>
-                    <article class="project-card reveal">
-                        <div class="project-image">
-                            <img src="assets/audio-blackbox-og-image.png" alt="Audio Blackbox" loading="lazy">
+                        <h3 data-i18n="project.marc.title">mARC (Multi-Agent Relay Control)</h3>
+                        <p data-i18n="project.marc.desc">
+                            Uma equipe de agentes de IA operando como especialistas em um console estilo IRC. Construído sobre Claude Code, Google Antigravity e Copilot CLI. Automatiza o desenvolvimento de ponta a ponta.
+                        </p>
+                        <div class="product-links">
+                            <a href="https://marc.nexaduo.com" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+                                <span data-i18n="project.visit">Visitar Site</span> <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                            </a>
+                            <a href="https://github.com/NexaDuo/mARC" target="_blank" rel="noopener noreferrer" class="btn btn-ghost">
+                                <i class="fab fa-github" aria-hidden="true"></i> <span data-i18n="project.repo">Repositório</span>
+                            </a>
                         </div>
-                        <div class="project-content">
-                            <div class="project-tags">
-                                <span class="project-tag">Android</span>
-                                <span class="project-tag">Kotlin</span>
-                                <span class="project-tag">Audio</span>
+                    </div>
+                </article>
+
+                <div class="lab reveal">
+                    <h3 class="lab-title" data-i18n="lab.title">Open source e experimentos</h3>
+                    <ul class="lab-list">
+                        <li class="lab-item">
+                            <div class="lab-item-text">
+                                <h4 data-i18n="project.audio_blackbox.title">Audio Blackbox</h4>
+                                <p data-i18n="project.audio_blackbox.desc">
+                                    Um gravador de áudio de memória contínua para Android que mantém uma janela rolante de áudio e salva no armazenamento apenas quando você pede.
+                                </p>
+                                <span class="lab-meta">Android · Kotlin</span>
                             </div>
-                            <h3 data-i18n="project.audio_blackbox.title">Audio Blackbox</h3>
-                            <p data-i18n="project.audio_blackbox.desc">
-                                A continuous memory audio recorder for Android that keeps a rolling window of audio and writes to storage only when explicitly requested.
-                            </p>
-                            <div class="project-links">
-                                <a href="https://github.com/alexandre-machado/audio-blackbox" target="_blank" rel="noopener noreferrer" class="btn btn-ghost">
-                                    <i class="fab fa-github"></i> <span data-i18n="project.repo">Repositório</span>
+                            <div class="lab-links">
+                                <a href="https://alexandre.machado.cc/audio-blackbox" target="_blank" rel="noopener noreferrer" class="lab-link">
+                                    <span data-i18n="project.visit">Visitar Site</span>
                                 </a>
-                                <a href="https://alexandre.machado.cc/audio-blackbox" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
-                                    <i class="fas fa-external-link-alt"></i> <span data-i18n="project.visit">Visitar Site</span>
+                                <a href="https://github.com/alexandre-machado/audio-blackbox" target="_blank" rel="noopener noreferrer" class="lab-link">
+                                    <i class="fab fa-github" aria-hidden="true"></i> <span data-i18n="project.repo">Repositório</span>
                                 </a>
                             </div>
-                        </div>
-                    </article>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </section>
@@ -740,7 +772,7 @@
                     <ul>
                         <li><a href="#home" data-i18n="nav.home">Início</a></li>
                         <li><a href="#services" data-i18n="nav.services">Serviços</a></li>
-                        <li><a href="#projects" data-i18n="nav.projects">Projetos</a></li>
+                        <li><a href="#products" data-i18n="nav.products">Produtos</a></li>
                         <li><a href="#contact" data-i18n="nav.contact">Contato</a></li>
                         <li><a href="/privacy-policy" data-i18n="footer.privacy">Política de Privacidade</a></li>
                         <li><a href="/terms-of-service" data-i18n="footer.terms">Termos de Uso</a></li>
