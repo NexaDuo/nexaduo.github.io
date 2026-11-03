@@ -195,7 +195,7 @@ assert(productCardBox.height < 400, `Product card height stays under 400px on de
 assert(await productCard.locator('.product-card-media img').isVisible(), 'Product thumbnail is visible');
 assert(await productCard.locator('.project-tag').count() >= 1, 'Product tags present');
 assert(await productCard.locator('.product-links .btn').count() === 2, '2 product links (site + repo) present');
-assert(await desktop.locator('.lab-item').count() >= 1, 'Open source and experiments list present');
+assert(await desktop.locator('.product-card--lab').isVisible(), 'Open source and experiments card present');
 
 // Contact section
 console.log('\n📞 Contact');
