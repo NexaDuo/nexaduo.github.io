@@ -164,23 +164,26 @@ await desktop.waitForTimeout(800);
 const animated = await cards.first().evaluate(el => el.classList.contains('visible'));
 assert(animated, 'Service cards animate on scroll (reveal)');
 
-// Projects section
-console.log('\n📁 Projects');
-await desktop.locator('#projects').scrollIntoViewIfNeeded();
+// Products section
+console.log('\n📦 Products');
+await desktop.locator('#products').scrollIntoViewIfNeeded();
 await desktop.waitForTimeout(300);
-// Regression for #16: single mARC project card rendered ~675px tall on
-// desktop because a full-width 16/9 thumbnail stretched the whole grid
-// column. Card must now stay compact.
-const projectCard = desktop.locator('.project-card').first();
-assert(await projectCard.isVisible(), 'Project card is visible');
-const projectCardBox = await projectCard.boundingBox();
-assert(projectCardBox.height < 400, `Project card height stays under 400px on desktop (${Math.round(projectCardBox.height)}px)`);
-assert(await projectCard.locator('.project-image img').isVisible(), 'Project thumbnail is visible');
-assert(await projectCard.locator('.project-tag').count() >= 1, 'Project tags present');
-assert(await projectCard.locator('h3').isVisible(), 'Project title visible');
-assert(await projectCard.locator('p').isVisible(), 'Project description visible');
-const projectLinks = projectCard.locator('.project-links .btn');
-assert(await projectLinks.count() === 2, '2 project links (repo + visit) present');
+const featured = desktop.locator('.product-featured');
+assert(await featured.isVisible(), 'Featured product (Vaelo) is visible');
+assert(await featured.locator('.product-featured-screen').isVisible(), 'Vaelo app screenshot is visible');
+assert((await featured.locator('.product-name').textContent()).includes('Vaelo'), 'Featured product is Vaelo');
+assert(await featured.locator('.product-links .btn').count() === 2, '2 Vaelo links (app + site) present');
+const featuredBox = await featured.boundingBox();
+assert(featuredBox.height < 640, `Featured product stays compact on desktop (${Math.round(featuredBox.height)}px)`);
+// Regression for #16: the secondary card must stay a compact horizontal row.
+const productCard = desktop.locator('.product-card').first();
+assert(await productCard.isVisible(), 'Product card is visible');
+const productCardBox = await productCard.boundingBox();
+assert(productCardBox.height < 400, `Product card height stays under 400px on desktop (${Math.round(productCardBox.height)}px)`);
+assert(await productCard.locator('.product-card-media img').isVisible(), 'Product thumbnail is visible');
+assert(await productCard.locator('.project-tag').count() >= 1, 'Product tags present');
+assert(await productCard.locator('.product-links .btn').count() === 2, '2 product links (site + repo) present');
+assert(await desktop.locator('.lab-item').count() >= 1, 'Open source and experiments list present');
 
 // Contact section
 console.log('\n📞 Contact');
@@ -302,12 +305,14 @@ await mobile.waitForTimeout(300);
 const bodyOverflow2 = await mobile.evaluate(() => getComputedStyle(document.body).overflow);
 assert(bodyOverflow2 !== 'hidden', 'Body scroll unlocked when menu closed');
 
-// Project card stays legible on mobile (no horizontal overflow, stacked layout)
-await mobile.locator('#projects').scrollIntoViewIfNeeded();
+// Products stay legible on mobile (no horizontal overflow, stacked layout)
+await mobile.locator('#products').scrollIntoViewIfNeeded();
 await mobile.waitForTimeout(300);
-const mobileCardBox = await mobile.locator('.project-card').first().boundingBox();
-assert(mobileCardBox.width <= 390, `Project card does not overflow mobile viewport (${Math.round(mobileCardBox.width)}px)`);
-assert(await mobile.locator('.project-card').first().locator('.project-links .btn').count() === 2, '2 project links present on mobile');
+for (const sel of ['.product-featured', '.product-card']) {
+    const box = await mobile.locator(sel).first().boundingBox();
+    assert(box.width <= 390, `${sel} does not overflow mobile viewport (${Math.round(box.width)}px)`);
+}
+assert(await mobile.locator('.product-featured .product-links .btn').count() === 2, '2 Vaelo links present on mobile');
 
 await mobile.screenshot({ path: '/tmp/pw-mobile.png' });
 await mobile.close();
@@ -349,7 +354,7 @@ const h1Count = await a11y.locator('h1').count();
 assert(h1Count === 1, 'Single H1 on page');
 
 const h2Count = await a11y.locator('h2').count();
-assert(h2Count === 3, `3 H2 sections: services + projects + contact (found ${h2Count})`);
+assert(h2Count === 3, `3 H2 sections: services + products + contact (found ${h2Count})`);
 
 // Alt text on images
 const imgsWithoutAlt = await a11y.locator('img:not([alt])').count();
