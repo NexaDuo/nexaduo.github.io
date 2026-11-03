@@ -1,7 +1,7 @@
 import { chromium } from 'playwright';
 import { createServer } from 'http';
 import { readFile } from 'fs/promises';
-import { join, extname } from 'path';
+import { join, extname, sep } from 'path';
 import { fileURLToPath } from 'url';
 
 const PORT = 8080;
@@ -17,6 +17,10 @@ const MIME = {
 const server = createServer(async (req, res) => {
     const path = req.url.split('?')[0];
     const filePath = join(ROOT, path === '/' ? 'index.html' : path);
+    if (filePath !== ROOT && !filePath.startsWith(ROOT + sep)) {
+        res.writeHead(403);
+        return res.end();
+    }
     try {
         const data = await readFile(filePath);
         res.writeHead(200, { 'Content-Type': MIME[extname(filePath)] || 'application/octet-stream' });
@@ -27,7 +31,7 @@ const server = createServer(async (req, res) => {
     }
 });
 
-await new Promise(resolve => server.listen(PORT, resolve));
+await new Promise(resolve => server.listen(PORT, '127.0.0.1', resolve));
 console.log(`Server running on http://localhost:${PORT}`);
 
 const BASE = `http://localhost:${PORT}`;
