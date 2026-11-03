@@ -15,7 +15,8 @@ const MIME = {
 };
 
 const server = createServer(async (req, res) => {
-    const filePath = join(ROOT, req.url === '/' ? 'index.html' : req.url);
+    const path = req.url.split('?')[0];
+    const filePath = join(ROOT, path === '/' ? 'index.html' : path);
     try {
         const data = await readFile(filePath);
         res.writeHead(200, { 'Content-Type': MIME[extname(filePath)] || 'application/octet-stream' });
@@ -163,6 +164,13 @@ await desktop.locator('#services').scrollIntoViewIfNeeded();
 await desktop.waitForTimeout(800);
 const animated = await cards.first().evaluate(el => el.classList.contains('visible'));
 assert(animated, 'Service cards animate on scroll (reveal)');
+
+// Cache busting: a stale styles.css with a new index.html left the
+// products lists unstyled for returning visitors right after a deploy.
+const unversioned = await desktop.evaluate(() => [
+    ...document.querySelectorAll('link[href$=".css"], script[src$=".js"]'),
+].map(el => el.getAttribute('href') || el.getAttribute('src')).filter(u => !/^https?:/.test(u)));
+assert(unversioned.length === 0, `Local CSS/JS carry a ?v= version (${unversioned.join(', ') || 'all versioned'})`);
 
 // Products section
 console.log('\n📦 Products');

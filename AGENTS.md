@@ -48,3 +48,7 @@ what is NOT obvious from reading the repo.
   `gh repo edit --enable-issues`. Issues are the source of truth (no Project board).
 - Navbar logo alignment: the `<img>` is wrapped in `<picture>`; use
   `.nav-brand picture { display: contents }` so the img is the flex child again.
+- **Bump the asset version on every CSS/JS change.** `styles.css`, `i18n.js` and
+  `script.js` are referenced as `?v=YYYYMMDD` in all three pages. Pages serves them
+  with `max-age=600`, so without a new version, returning visitors get the new HTML
+  with the old CSS (the products lists showed unstyled right after PR #22).
