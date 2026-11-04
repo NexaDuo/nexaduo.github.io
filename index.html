@@ -48,11 +48,17 @@
            full stylesheet do not diverge. */
         :root {
             --bg-primary: #030712;
+            --bg-secondary: #0f172a;
+            --surface-solid: #0f172a;
             --accent: #4f46e5;
             --accent-hover: #5b52f0;
+            --accent-light: #818cf8;
             --text-primary: #f8fafc;
             --text-body: #e2e8f0;
             --text-secondary: #94a3b8;
+            --text-muted: #7c8ba0;
+            --border: rgba(99, 102, 241, 0.12);
+            --border-hover: rgba(99, 102, 241, 0.24);
         }
 
         @font-face {
@@ -74,6 +80,13 @@
 
         html {
             scroll-behavior: smooth;
+            scrollbar-color: #334155 #030712;
+            caret-color: #818cf8;
+        }
+
+        ::selection {
+            background: rgba(79, 70, 229, 0.35);
+            color: #f8fafc;
         }
 
         body {
@@ -83,6 +96,29 @@
             line-height: 1.6;
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 4.6vw, 3.75rem);
+            line-height: 1.12;
+            letter-spacing: -0.025em;
+        }
+
+        h2 {
+            font-size: clamp(1.875rem, 3.2vw, 2.5rem);
+            line-height: 1.18;
+            letter-spacing: -0.02em;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            line-height: 1.25;
+            letter-spacing: -0.015em;
+        }
+
+        h4 {
+            font-size: 1.2rem;
+            line-height: 1.3;
         }
 
         .container {
@@ -110,17 +146,17 @@
         .nav-container {
             max-width: 880px;
             margin: 0 auto;
-            padding: 0 8px 0 20px;
-            height: 56px;
+            padding: 8px 10px 8px 20px;
+            min-height: 56px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            background: rgba(3, 7, 18, 0.6);
+            background: rgba(3, 7, 18, 0.72);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 100px;
-            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.12);
+            box-shadow: 0 8px 28px rgba(0, 0, 0, 0.35);
             pointer-events: auto;
             transition: background 0.3s, box-shadow 0.3s, border-color 0.3s;
         }
@@ -166,7 +202,7 @@
 
         .nav-link {
             text-decoration: none;
-            color: rgba(255, 255, 255, 0.65);
+            color: rgba(255, 255, 255, 0.7);
             font-size: 0.875rem;
             font-weight: 500;
             padding: 6px 14px;
@@ -194,7 +230,7 @@
 
         .nav-cta:hover {
             background: var(--accent-hover);
-            box-shadow: 0 4px 14px rgba(79, 70, 229, 0.35);
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
         }
 
         .nav-toggle {
@@ -232,7 +268,7 @@
             min-height: 24px;
             border: none;
             background: transparent;
-            color: rgba(255, 255, 255, 0.6);
+            color: rgba(255, 255, 255, 0.65);
             font-family: inherit;
             font-size: 0.75rem;
             font-weight: 600;
@@ -259,51 +295,54 @@
             align-items: center;
             position: relative;
             overflow: hidden;
-            padding: 120px 0 80px;
-        }
-
-        .hero-glow {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(80px);
-            pointer-events: none;
+            padding: 132px 0 88px;
+            border-bottom: 1px solid var(--border);
         }
 
         .hero-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 64px;
+            grid-template-columns: minmax(0, 11fr) minmax(0, 10fr);
+            gap: 48px;
             align-items: center;
             position: relative;
             z-index: 1;
         }
 
         .hero-title {
-            font-size: clamp(2.5rem, 5vw, 3.75rem);
+            font-size: clamp(2.5rem, 4.6vw, 3.75rem);
             font-weight: 700;
-            line-height: 1.15;
+            line-height: 1.12;
+            letter-spacing: -0.025em;
             margin-bottom: 24px;
             color: #f8fafc;
+            text-wrap: balance;
         }
 
-        .gradient-text {
-            background: linear-gradient(135deg, #6366f1, #8b5cf6, #06b6d4);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+        .hero-accent {
+            color: #a5b4fc;
         }
 
         .hero-desc {
             font-size: 1.125rem;
             color: #94a3b8;
-            margin-bottom: 32px;
+            margin-bottom: 36px;
             line-height: 1.7;
+            max-width: 60ch;
         }
 
         .hero-actions {
             display: flex;
             gap: 16px;
             flex-wrap: wrap;
+            margin-bottom: 32px;
+        }
+
+        .hero-proof-bar {
+            padding-top: 20px;
+            border-top: 1px solid rgba(148, 163, 184, 0.14);
+            font-size: 0.875rem;
+            color: #94a3b8;
+            letter-spacing: 0.01em;
         }
 
         .btn {
@@ -327,6 +366,7 @@
         .btn-primary {
             background: #4f46e5;
             color: #fff;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
         }
 
         .btn-ghost {
@@ -335,18 +375,12 @@
             border: 1.5px solid rgba(226, 232, 240, 0.2);
         }
 
-        .hero-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 0.875rem;
-            font-weight: 500;
-            color: #818cf8;
-            padding: 6px 16px;
-            background: rgba(99, 102, 241, 0.1);
-            border: 1px solid rgba(99, 102, 241, 0.2);
-            border-radius: 100px;
-            margin-bottom: 24px;
+        .telemetry-panel {
+            background: #0b1120;
+            border: 1px solid rgba(99, 102, 241, 0.22);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 24px 48px rgba(0, 0, 0, 0.5);
         }
 
         .skip-link {
@@ -367,16 +401,23 @@
             top: 16px;
         }
 
+        @media (max-width: 960px) {
+            .hero-grid {
+                grid-template-columns: minmax(0, 1fr);
+                gap: 40px;
+            }
+        }
+
         @media (max-width: 768px) {
             .header {
                 padding: 12px 16px;
             }
 
             .nav-container {
-                padding: 0 8px 0 16px;
+                padding: 6px 8px 6px 16px;
                 backdrop-filter: none;
                 -webkit-backdrop-filter: none;
-                background: rgba(3, 7, 18, 0.92);
+                background: rgba(3, 7, 18, 0.94);
             }
 
             .nav-cta {
@@ -419,22 +460,9 @@
 
             .nav-link {
                 font-size: 1.25rem;
-                color: rgba(255, 255, 255, 0.8);
+                color: rgba(255, 255, 255, 0.85);
                 padding: 12px 32px;
                 border-radius: 12px;
-            }
-
-            .hero-grid {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
-
-            .hero-visual {
-                display: none;
-            }
-
-            .hero-actions {
-                justify-content: center;
             }
 
             .hero-title {
@@ -444,9 +472,9 @@
     </style>
 
     <!-- Non-critical CSS -->
-    <link rel="preload" href="styles.css?v=20261103b" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="styles.css?v=20261103e" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript>
-        <link rel="stylesheet" href="styles.css?v=20261103b">
+        <link rel="stylesheet" href="styles.css?v=20261103e">
     </noscript>
 
     <!-- Font Awesome -->
@@ -508,52 +536,86 @@
     <main>
         <!-- Hero -->
         <section id="home" class="hero">
-            <div class="hero-glow hero-glow-1"></div>
-            <div class="hero-glow hero-glow-2"></div>
-            <div class="hero-glow hero-glow-3"></div>
             <div class="container hero-grid">
                 <div class="hero-content">
-                    <div class="hero-badge">
-                        <span class="hero-badge-dot"></span>
-                        <span data-i18n="hero.badge">Inovação &amp; Tecnologia</span>
-                    </div>
                     <h1 class="hero-title" data-i18n="hero.title">
-                        Transformamos <span class="gradient-text">ideias</span> em
-                        <span class="gradient-text">soluções tecnológicas</span>
+                        Transformamos <span class="hero-accent">ideias</span> em
+                        <span class="hero-accent">soluções tecnológicas</span>
                     </h1>
                     <p class="hero-desc" data-i18n="hero.desc">
-                        Desenvolvemos software personalizado e oferecemos consultoria
-                        tecnológica para impulsionar o crescimento do seu negócio no mundo digital.
+                        Projetamos plataformas robustas, agentes baseados em IA e infraestrutura em nuvem escalável para acelerar sua entrega digital.
                     </p>
                     <div class="hero-actions">
                         <a href="#contact" class="btn btn-primary btn-lg">
                             <span data-i18n="nav.cta">Fale Conosco</span>
-                            <i class="fas fa-arrow-right"></i>
+                            <i class="fas fa-arrow-right" aria-hidden="true"></i>
                         </a>
                         <a href="#services" class="btn btn-ghost btn-lg" data-i18n="hero.cta_secondary">Nossos Serviços</a>
                     </div>
+                    <p class="hero-proof-bar" data-i18n="hero.proof_strip">
+                        Porto Alegre, BR · Engenharia de Plataforma, IA Agêntica &amp; Software Próprio em Produção
+                    </p>
                 </div>
+
                 <div class="hero-visual">
-                    <div class="code-window">
-                        <div class="code-header">
-                            <div class="code-dots">
-                                <span class="code-dot" style="background:#ef4444"></span>
-                                <span class="code-dot" style="background:#eab308"></span>
-                                <span class="code-dot" style="background:#22c55e"></span>
+                    <aside class="telemetry-panel" aria-label="Especificação de Arquitetura NexaDuo">
+                        <div class="telemetry-header">
+                            <div class="telemetry-header-left">
+                                <span class="telemetry-dot" aria-hidden="true"></span>
+                                <span class="telemetry-title" data-i18n="spec.title">NEXADUO // ESPECIFICAÇÃO DE ARQUITETURA</span>
                             </div>
-                            <span class="code-title">nexaduo.js</span>
+                            <span class="telemetry-status" data-i18n="spec.status">PRODUÇÃO</span>
                         </div>
-                        <pre class="code-body"><code><span class="code-keyword">const</span> <span class="code-var">nexaduo</span> = {
-  <span class="code-prop" data-i18n="code.mission_key">missão</span>: <span class="code-string" data-i18n="code.mission_val">"inovar"</span>,
-  <span class="code-prop" data-i18n="code.services_key">serviços</span>: [
-    <span class="code-string" data-i18n="code.svc1">"Consultoria Tecnológica"</span>,
-    <span class="code-string" data-i18n="code.svc2">"Dados &amp; Analytics"</span>
-  ],
-  <span class="code-fn" data-i18n="code.transform">transformar</span>(<span class="code-param" data-i18n="code.param">ideia</span>) {
-    <span class="code-keyword">return</span> <span class="code-var" data-i18n="code.solution">solução</span>.<span class="code-fn" data-i18n="code.create">criar</span>(<span class="code-param" data-i18n="code.param">ideia</span>);
-  }
-};</code></pre>
-                    </div>
+                        <dl class="telemetry-list">
+                            <div class="telemetry-row">
+                                <dt class="telemetry-domain">
+                                    <span class="telemetry-index">01</span>
+                                    <span data-i18n="spec.row1.domain">Cloud &amp; Plataforma</span>
+                                    <span class="telemetry-stack" data-i18n="spec.row1.stack">AWS · Kubernetes · Docker</span>
+                                </dt>
+                                <dd class="telemetry-detail" data-i18n="spec.row1.detail">
+                                    Infraestrutura resiliente, sistemas orientados a eventos e observabilidade ponta a ponta.
+                                </dd>
+                            </div>
+                            <div class="telemetry-row">
+                                <dt class="telemetry-domain">
+                                    <span class="telemetry-index">02</span>
+                                    <span data-i18n="spec.row2.domain">Fluxos Agênticos</span>
+                                    <span class="telemetry-stack" data-i18n="spec.row2.stack">mARC · Gateways LLM · RAG</span>
+                                </dt>
+                                <dd class="telemetry-detail" data-i18n="spec.row2.detail">
+                                    Equipes de especialistas de IA (@dev, @sre, @sec, @rev) integradas ao ciclo de entrega.
+                                </dd>
+                            </div>
+                            <div class="telemetry-row">
+                                <dt class="telemetry-domain">
+                                    <span class="telemetry-index">03</span>
+                                    <span data-i18n="spec.row3.domain">Criptografia &amp; Sync</span>
+                                    <span class="telemetry-stack" data-i18n="spec.row3.stack">Zero-Knowledge E2E · Sync</span>
+                                </dt>
+                                <dd class="telemetry-detail" data-i18n="spec.row3.detail">
+                                    Dados cifrados nos dispositivos com sincronização determinística em produção no Vaelo.
+                                </dd>
+                            </div>
+                            <div class="telemetry-row">
+                                <dt class="telemetry-domain">
+                                    <span class="telemetry-index">04</span>
+                                    <span data-i18n="spec.row4.domain">Governança &amp; Entrega</span>
+                                    <span class="telemetry-stack" data-i18n="spec.row4.stack">CI/CD · @sec · Playwright</span>
+                                </dt>
+                                <dd class="telemetry-detail" data-i18n="spec.row4.detail">
+                                    Pipelines automatizados com validação contínua de segurança e performance.
+                                </dd>
+                            </div>
+                        </dl>
+                        <div class="telemetry-footer">
+                            <span class="telemetry-footer-label" data-i18n="spec.footer_label">Sistemas próprios auditáveis em produção:</span>
+                            <a href="#products" class="telemetry-link">
+                                <span data-i18n="spec.footer_cta">Ver Vaelo &amp; mARC</span>
+                                <i class="fas fa-arrow-down" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                    </aside>
                 </div>
             </div>
         </section>
@@ -561,43 +623,50 @@
         <!-- Services -->
         <section id="services" class="services">
             <div class="container">
-                <div class="section-header reveal">
-                    <span class="section-tag" data-i18n="services.tag">Serviços</span>
+                <div class="section-header section-spine reveal">
                     <h2 class="section-title" data-i18n="services.title">Soluções completas para o seu negócio</h2>
                     <p class="section-desc" data-i18n="services.desc">
-                        Combinamos expertise técnica com visão estratégica para entregar
-                        resultados que fazem a diferença.
+                        Combinamos profunda expertise em engenharia de plataformas com fluxos de trabalho de IA agêntica para entregar resultados de ponta a ponta.
                     </p>
                 </div>
                 <div class="services-grid">
                     <article class="service-card reveal">
-                        <div class="service-icon">
-                            <i class="fas fa-chart-line"></i>
+                        <div class="service-card-top">
+                            <div class="service-icon">
+                                <i class="fas fa-server" aria-hidden="true"></i>
+                            </div>
+                            <div class="service-heading-group">
+                                <h3 data-i18n="service1.title">Plataforma &amp; Infraestrutura</h3>
+                                <span class="service-scope" data-i18n="service1.scope">INFRAESTRUTURA &amp; SRE</span>
+                            </div>
                         </div>
-                        <h3 data-i18n="service1.title">Consultoria Tecnológica</h3>
-                        <p data-i18n="service1.desc">Orientamos sua empresa na escolha das melhores tecnologias e estratégias digitais.</p>
+                        <p data-i18n="service1.desc">Arquitetamos infraestrutura em nuvem escalável e confiável, além de pipelines de CI/CD robustos.</p>
                         <ul class="service-list">
-                            <li data-i18n="service1.item1">Análise de Arquitetura</li>
-                            <li data-i18n="service1.item2">Auditoria de Código</li>
-                            <li data-i18n="service1.item3">Planejamento Estratégico</li>
-                            <li data-i18n="service1.item4">Otimização de Performance</li>
+                            <li data-i18n="service1.item1">Arquitetura Cloud (AWS)</li>
+                            <li data-i18n="service1.item2">Confiabilidade &amp; Observabilidade</li>
+                            <li data-i18n="service1.item3">Sistemas Orientados a Eventos</li>
+                            <li data-i18n="service1.item4">Kubernetes &amp; Docker</li>
                         </ul>
                     </article>
 
                     <article class="service-card reveal">
-                        <div class="service-icon">
-                            <i class="fas fa-database"></i>
+                        <div class="service-card-top">
+                            <div class="service-icon">
+                                <i class="fas fa-network-wired" aria-hidden="true"></i>
+                            </div>
+                            <div class="service-heading-group">
+                                <h3 data-i18n="service2.title">IA &amp; Sistemas Agênticos</h3>
+                                <span class="service-scope" data-i18n="service2.scope">AUTOMAÇÃO &amp; ENGENHARIA IA</span>
+                            </div>
                         </div>
-                        <h3 data-i18n="service2.title">Dados &amp; Analytics</h3>
-                        <p data-i18n="service2.desc">Transformamos seus dados em insights valiosos através de dashboards e análises avançadas.</p>
+                        <p data-i18n="service2.desc">Construímos agentes de IA autônomos, gateways LLM e fluxos de trabalho inteligentes para equipes de engenharia modernas.</p>
                         <ul class="service-list">
-                            <li data-i18n="service2.item1">Business Intelligence</li>
-                            <li data-i18n="service2.item2">Data Visualization</li>
-                            <li data-i18n="service2.item3">Machine Learning</li>
-                            <li data-i18n="service2.item4">Big Data Solutions</li>
+                            <li data-i18n="service2.item1">Workflows Agênticos (mARC)</li>
+                            <li data-i18n="service2.item2">Gateways LLM</li>
+                            <li data-i18n="service2.item3">Pipelines RAG</li>
+                            <li data-i18n="service2.item4">Engenharia de Prompt</li>
                         </ul>
                     </article>
-
                 </div>
             </div>
         </section>
@@ -605,7 +674,7 @@
         <!-- Products -->
         <section id="products" class="products">
             <div class="container">
-                <div class="section-header reveal">
+                <div class="section-header section-spine reveal">
                     <h2 class="section-title" data-i18n="products.title">Produtos</h2>
                     <p class="section-desc" data-i18n="products.desc">
                         Software que construímos, mantemos e usamos no dia a dia.
@@ -619,14 +688,16 @@
                             data-i18n-attr="alt:product.vaelo.screen_alt">
                     </div>
                     <div class="product-featured-body">
-                        <p class="product-status">
-                            <span class="product-status-dot" aria-hidden="true"></span>
-                            <span data-i18n="product.vaelo.status">Disponível na web · Android e iPhone em breve</span>
-                        </p>
-                        <h3 class="product-name">
-                            <img src="assets/vaelo-icon.png" alt="" width="40" height="40" loading="lazy">
-                            <span>Vaelo</span>
-                        </h3>
+                        <div class="product-featured-header">
+                            <h3 class="product-name">
+                                <img src="assets/vaelo-icon.png" alt="" width="40" height="40" loading="lazy">
+                                <span>Vaelo</span>
+                            </h3>
+                            <p class="product-status">
+                                <span class="product-status-dot" aria-hidden="true"></span>
+                                <span data-i18n="product.vaelo.status">Disponível na web · Android e iPhone em breve</span>
+                            </p>
+                        </div>
                         <p class="product-pitch" data-i18n="product.vaelo.pitch">Despesas em grupo, sem entregar seus dados.</p>
                         <p class="product-desc" data-i18n="product.vaelo.desc">
                             O app para dividir as contas da viagem, da casa ou dos amigos. Os lançamentos ficam nos aparelhos e só viajam cifrados de ponta a ponta.
@@ -652,14 +723,14 @@
                         <img src="assets/marc-og-image.png" alt="" loading="lazy">
                     </div>
                     <div class="product-card-body">
+                        <h3 data-i18n="project.marc.title">mARC (Multi-Agent Relay Control)</h3>
                         <div class="project-tags">
                             <span class="project-tag">AI/Agentic</span>
                             <span class="project-tag">Claude Code</span>
                             <span class="project-tag">Open source</span>
                         </div>
-                        <h3 data-i18n="project.marc.title">mARC (Multi-Agent Relay Control)</h3>
                         <p data-i18n="project.marc.desc">
-                            Uma equipe de agentes de IA operando como especialistas em um console estilo IRC. Construído sobre Claude Code, Google Antigravity e Copilot CLI. Automatiza o desenvolvimento de ponta a ponta.
+                            Uma equipe de agentes de IA operando como especialistas em um console estilo IRC. Construído sobre Claude Code, Google Antigravity e Copilot CLI. Automatiza o desenvolvimento de ponta a ponta com papéis definidos: @dev, @sre, @design, @sec e @rev.
                         </p>
                         <div class="product-links">
                             <a href="https://marc.nexaduo.com" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
@@ -673,38 +744,165 @@
                 </article>
 
                 <h3 class="lab-title reveal" data-i18n="lab.title">Open source e experimentos</h3>
-                <article class="product-card product-card--lab reveal">
-                    <div class="product-card-media">
-                        <img src="assets/audio-blackbox-icon.webp" alt="" width="320" height="360" loading="lazy">
-                    </div>
-                    <div class="product-card-body">
-                        <div class="project-tags">
-                            <span class="project-tag">Android</span>
-                            <span class="project-tag">Kotlin</span>
-                            <span class="project-tag">Audio</span>
+                <div class="lab-grid">
+                    <article class="product-card product-card--lab reveal">
+                        <div class="product-card-media">
+                            <img src="assets/debora-whisper.webp" alt="" width="640" height="640" loading="lazy" class="product-card-img--mascot">
                         </div>
-                        <h4 data-i18n="project.audio_blackbox.title">Audio Blackbox</h4>
-                        <p data-i18n="project.audio_blackbox.desc">
-                            Um gravador de áudio de memória contínua para Android que mantém uma janela rolante de áudio e salva no armazenamento apenas quando você pede.
+                        <div class="product-card-body">
+                            <h4 data-i18n="project.debora.title">Débora Whisper</h4>
+                            <div class="project-tags">
+                                <span class="project-tag">Windows &amp; Linux</span>
+                                <span class="project-tag">Intel NPU · CUDA</span>
+                                <span class="project-tag">Voice AI</span>
+                                <span class="project-tag">Open source</span>
+                            </div>
+                            <p data-i18n="project.debora.desc">
+                                Ditado por voz e modo conversacional 100% local para Windows e Linux, acelerado em Intel NPU (OpenVINO) ou NVIDIA RTX (CUDA), com overlay Dynamic Island e integração direta com Claude Code.
+                            </p>
+                            <div class="product-links">
+                                <a href="https://github.com/alexandre-machado/debora-whisper" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+                                    <i class="fab fa-github" aria-hidden="true"></i> <span data-i18n="project.repo">Repositório</span>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="product-card product-card--lab reveal">
+                        <div class="product-card-media">
+                            <img src="assets/audio-blackbox-og-image.png" alt="" loading="lazy">
+                        </div>
+                        <div class="product-card-body">
+                            <h4 data-i18n="project.audio_blackbox.title">Audio Blackbox</h4>
+                            <div class="project-tags">
+                                <span class="project-tag">Android</span>
+                                <span class="project-tag">Kotlin</span>
+                                <span class="project-tag">Audio</span>
+                            </div>
+                            <p data-i18n="project.audio_blackbox.desc">
+                                Um gravador de áudio de memória contínua para Android que mantém uma janela rolante de áudio e salva no armazenamento apenas quando você pede.
+                            </p>
+                            <div class="product-links">
+                                <a href="https://alexandre.machado.cc/audio-blackbox" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+                                    <span data-i18n="project.visit">Visitar Site</span> <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                                </a>
+                                <a href="https://github.com/alexandre-machado/audio-blackbox" target="_blank" rel="noopener noreferrer" class="btn btn-ghost">
+                                    <i class="fab fa-github" aria-hidden="true"></i> <span data-i18n="project.repo">Repositório</span>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+
+                <div class="pub-header reveal">
+                    <div class="pub-header-text">
+                        <h3 class="pub-title" data-i18n="pub.title">Publicações e artigos técnicos</h3>
+                        <p class="pub-subtitle" data-i18n="pub.desc">
+                            Artigos sobre arquitetura de agentes, engenharia de plataforma e sistemas em produção.
                         </p>
-                        <div class="product-links">
-                            <a href="https://alexandre.machado.cc/audio-blackbox" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
-                                <span data-i18n="project.visit">Visitar Site</span> <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                    </div>
+                    <div class="pub-profiles">
+                        <a href="https://medium.com/@alexandre-machado" target="_blank" rel="noopener noreferrer" class="pub-profile-link">
+                            <i class="fab fa-medium" aria-hidden="true"></i> <span>Medium</span>
+                        </a>
+                        <a href="https://dev.to/alexandremachado" target="_blank" rel="noopener noreferrer" class="pub-profile-link">
+                            <i class="fab fa-dev" aria-hidden="true"></i> <span>dev.to</span>
+                        </a>
+                        <a href="https://www.linkedin.com/in/alexandre~machado/" target="_blank" rel="noopener noreferrer" class="pub-profile-link">
+                            <i class="fab fa-linkedin" aria-hidden="true"></i> <span>LinkedIn</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="pub-list">
+                    <article class="pub-card reveal">
+                        <div class="pub-card-body">
+                            <h4 class="pub-item-title" data-i18n="pub.item1.title">
+                                I Gave Claude Code a Voice on My Windows Laptop. The Slowest Part Is the Voice.
+                            </h4>
+                            <div class="pub-meta">
+                                <time class="pub-date" datetime="2026-10" data-i18n="pub.item1.date">Out 2026</time>
+                                <span class="project-tag">Claude Code</span>
+                                <span class="project-tag">Voice TTS</span>
+                                <span class="project-tag">Local AI</span>
+                            </div>
+                            <p class="pub-item-desc" data-i18n="pub.item1.desc">
+                                Análise de latência e arquitetura ao integrar síntese de voz neural local ao fluxo diário de engenharia com Claude Code no Windows.
+                            </p>
+                        </div>
+                        <div class="pub-links">
+                            <a href="https://dev.to/alexandremachado/i-gave-claude-code-a-voice-on-my-windows-laptop-the-slowest-part-is-the-voice-10ma"
+                                target="_blank" rel="noopener noreferrer" class="btn btn-ghost pub-btn">
+                                <i class="fab fa-dev" aria-hidden="true"></i> <span>dev.to</span>
+                                <i class="fas fa-arrow-up-right-from-square pub-ext-icon" aria-hidden="true"></i>
                             </a>
-                            <a href="https://github.com/alexandre-machado/audio-blackbox" target="_blank" rel="noopener noreferrer" class="btn btn-ghost">
-                                <i class="fab fa-github" aria-hidden="true"></i> <span data-i18n="project.repo">Repositório</span>
+                            <a href="https://medium.com/@alexandre-machado/i-gave-claude-code-a-voice-on-my-windows-laptop-the-slowest-part-is-the-voice-81987566e524"
+                                target="_blank" rel="noopener noreferrer" class="btn btn-ghost pub-btn">
+                                <i class="fab fa-medium" aria-hidden="true"></i> <span>Medium</span>
+                                <i class="fas fa-arrow-up-right-from-square pub-ext-icon" aria-hidden="true"></i>
                             </a>
                         </div>
-                    </div>
-                </article>
+                    </article>
+
+                    <article class="pub-card reveal">
+                        <div class="pub-card-body">
+                            <h4 class="pub-item-title" data-i18n="pub.item2.title">
+                                My AI team has a tech lead, a board, and a security gate it can’t skip
+                            </h4>
+                            <div class="pub-meta">
+                                <time class="pub-date" datetime="2026-07" data-i18n="pub.item2.date">Jul 2026</time>
+                                <span class="project-tag">mARC</span>
+                                <span class="project-tag">Multi-Agent</span>
+                                <span class="project-tag">DevSecOps</span>
+                            </div>
+                            <p class="pub-item-desc" data-i18n="pub.item2.desc">
+                                Como estruturamos o mARC para operar um repositório real com especialistas isolados (@techlead, @dev, @sre, @sec, @rev) e gate de segurança obrigatório antes do merge.
+                            </p>
+                        </div>
+                        <div class="pub-links">
+                            <a href="https://medium.com/@alexandre-machado/my-ai-team-has-a-tech-lead-a-board-and-a-security-gate-it-cant-skip-01b6b8904377"
+                                target="_blank" rel="noopener noreferrer" class="btn btn-ghost pub-btn">
+                                <i class="fab fa-medium" aria-hidden="true"></i> <span>Medium</span>
+                                <i class="fas fa-arrow-up-right-from-square pub-ext-icon" aria-hidden="true"></i>
+                            </a>
+                            <a href="https://dev.to/alexandremachado/marc-irc-style-ai-agent-team-for-claude-code-that-runs-its-own-repo-22kk"
+                                target="_blank" rel="noopener noreferrer" class="btn btn-ghost pub-btn">
+                                <i class="fab fa-dev" aria-hidden="true"></i> <span>dev.to</span>
+                                <i class="fas fa-arrow-up-right-from-square pub-ext-icon" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                    </article>
+
+                    <article class="pub-card reveal">
+                        <div class="pub-card-body">
+                            <h4 class="pub-item-title" data-i18n="pub.item3.title">
+                                Fale com o Xerife!!
+                            </h4>
+                            <div class="pub-meta">
+                                <time class="pub-date" datetime="2021-07" data-i18n="pub.item3.date">Jul 2021</time>
+                                <span class="project-tag">Warren Tech</span>
+                                <span class="project-tag" data-i18n="pub.item3.tag">Engenharia</span>
+                            </div>
+                            <p class="pub-item-desc" data-i18n="pub.item3.desc">
+                                Publicado no blog de engenharia da Warren Brasil sobre organização de times técnicos, proteção de foco e triagem de incidentes em escala.
+                            </p>
+                        </div>
+                        <div class="pub-links">
+                            <a href="https://medium.com/warren-tech/fale-com-o-xerife-6929002b9d5e"
+                                target="_blank" rel="noopener noreferrer" class="btn btn-ghost pub-btn">
+                                <i class="fab fa-medium" aria-hidden="true"></i> <span>Medium · Warren Tech</span>
+                                <i class="fas fa-arrow-up-right-from-square pub-ext-icon" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                    </article>
+                </div>
             </div>
         </section>
 
         <!-- Contact -->
         <section id="contact" class="contact">
             <div class="container">
-                <div class="section-header reveal">
-                    <span class="section-tag" data-i18n="contact.tag">Contato</span>
+                <div class="section-header section-spine reveal">
                     <h2 class="section-title" data-i18n="contact.title">Vamos conversar sobre seu projeto</h2>
                     <p class="section-desc" data-i18n="contact.desc">
                         Estamos prontos para ajudar você a transformar suas ideias em realidade.
@@ -712,7 +910,7 @@
                 </div>
                 <div class="contact-grid">
                     <div class="contact-team reveal">
-                        <h3 data-i18n="contact.team_title">Nossa Equipe</h3>
+                        <h3 data-i18n="contact.team_title">Liderança &amp; Engenharia</h3>
                         <div class="contact-person">
                             <picture>
                                 <source srcset="assets/alexandre-64.webp" type="image/webp">
@@ -721,33 +919,34 @@
                             </picture>
                             <div class="contact-person-info">
                                 <h4>Alexandre Machado</h4>
-                                <p><i class="fas fa-phone"></i> +55 (51) 994 410 700</p>
-                                <p><i class="fas fa-envelope"></i> alexandre@nexaduo.com</p>
+                                <p class="contact-role" data-i18n="contact.person_role">Fundador &amp; Engenheiro Principal</p>
+                                <p><i class="fas fa-phone" aria-hidden="true"></i> <a href="tel:+5551994410700">+55 (51) 994 410 700</a></p>
+                                <p><i class="fas fa-envelope" aria-hidden="true"></i> <a href="mailto:alexandre@nexaduo.com">alexandre@nexaduo.com</a></p>
                             </div>
                         </div>
                     </div>
                     <div class="contact-details reveal">
-                        <h3 data-i18n="contact.info_title">Informações</h3>
+                        <h3 data-i18n="contact.info_title">Canais Diretos &amp; Registro</h3>
                         <div class="contact-item">
-                            <i class="fas fa-envelope"></i>
-                            <span>contato@nexaduo.com</span>
+                            <i class="fas fa-envelope" aria-hidden="true"></i>
+                            <a href="mailto:contato@nexaduo.com">contato@nexaduo.com</a>
                         </div>
                         <div class="contact-item">
-                            <i class="fas fa-map-marker-alt"></i>
+                            <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
                             <span data-i18n="contact.location">Porto Alegre, RS - Brasil</span>
                         </div>
                         <div class="contact-item">
-                            <i class="fas fa-building"></i>
+                            <i class="fas fa-building" aria-hidden="true"></i>
                             <span>CNPJ: 29.667.108/0001-14</span>
                         </div>
                         <div class="contact-social">
                             <a href="https://www.linkedin.com/company/nexaduo" target="_blank" rel="noopener noreferrer"
                                 class="social-link" aria-label="LinkedIn">
-                                <i class="fab fa-linkedin"></i>
+                                <i class="fab fa-linkedin" aria-hidden="true"></i>
                             </a>
                             <a href="https://github.com/NexaDuo" target="_blank" rel="noopener noreferrer"
                                 class="social-link" aria-label="GitHub">
-                                <i class="fab fa-github"></i>
+                                <i class="fab fa-github" aria-hidden="true"></i>
                             </a>
                         </div>
                     </div>
@@ -793,16 +992,16 @@
                 <p data-i18n="footer.copyright">&copy; 2026 NexaDuo. Todos os direitos reservados.</p>
                 <div class="footer-social">
                     <a href="https://www.linkedin.com/company/nexaduo" target="_blank" rel="noopener noreferrer"
-                        aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                        aria-label="LinkedIn"><i class="fab fa-linkedin" aria-hidden="true"></i></a>
                     <a href="https://github.com/NexaDuo" target="_blank" rel="noopener noreferrer"
-                        aria-label="GitHub"><i class="fab fa-github"></i></a>
+                        aria-label="GitHub"><i class="fab fa-github" aria-hidden="true"></i></a>
                 </div>
             </div>
         </div>
     </footer>
 
-    <script src="i18n.js?v=20261103b" defer></script>
-    <script src="script.js?v=20261103b" defer></script>
+    <script src="i18n.js?v=20261103e" defer></script>
+    <script src="script.js?v=20261103e" defer></script>
 
     <!-- Microsoft Clarity -->
     <script type="text/javascript">

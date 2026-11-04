@@ -49,6 +49,7 @@ node_modules/
 
 # Agent tooling
 .serena/
+.impeccable/review/
 
 # OS generated files
 .DS_Store

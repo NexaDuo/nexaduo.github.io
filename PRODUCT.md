@@ -42,7 +42,7 @@ NexaDuo is a practitioner-led engineering consultancy and studio: rather than on
 
 - **Vaelo (`https://vaelo.club`, `https://app.vaelo.club`):** End-to-end encrypted, offline-first group expense splitting app with Brazilian IPCA inflation adjustment. Assets: `assets/vaelo-screen.webp`, `assets/vaelo-icon.png`.
 - **mARC — Multi-Agent Relay Control (`https://marc.nexaduo.com`, `https://github.com/NexaDuo/mARC`):** Open-source team of AI agents operating as specialists (`@dev`, `@sre`, `@design`, `@sec`, `@rev`) in an IRC-style console built on Claude Code, Google Antigravity, and Copilot CLI. Asset: `assets/marc-og-image.png`.
-- **Audio Blackbox (`https://alexandre.machado.cc/audio-blackbox`, `https://github.com/alexandre-machado/audio-blackbox`):** Continuous-memory rolling audio recorder for Android written in Kotlin. Asset: `assets/audio-blackbox-icon.webp`.
+- **Audio Blackbox (`https://alexandre.machado.cc/audio-blackbox`, `https://github.com/alexandre-machado/audio-blackbox`):** Continuous-memory rolling audio recorder for Android written in Kotlin. Asset: `assets/audio-blackbox-og-image.png`.
 - **No fabricated social proof:** Do not invent client logos, unverified testimonials, fake metrics, or pricing tiers.
 
 ## Product Principles

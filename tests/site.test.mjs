@@ -1,10 +1,11 @@
 import { chromium } from 'playwright';
 import { createServer } from 'http';
-import { readFile } from 'fs/promises';
+import { readFile, mkdir } from 'fs/promises';
+import { existsSync } from 'fs';
 import { join, extname, sep } from 'path';
 import { fileURLToPath } from 'url';
 
-const PORT = 8080;
+const REQUESTED_PORT = Number(process.env.PORT) || 0;
 const ROOT = join(fileURLToPath(import.meta.url), '..', '..');
 
 const MIME = {
@@ -31,7 +32,8 @@ const server = createServer(async (req, res) => {
     }
 });
 
-await new Promise(resolve => server.listen(PORT, '127.0.0.1', resolve));
+await new Promise(resolve => server.listen(REQUESTED_PORT, '127.0.0.1', resolve));
+const PORT = server.address().port;
 console.log(`Server running on http://localhost:${PORT}`);
 
 const BASE = `http://localhost:${PORT}`;
@@ -49,7 +51,9 @@ function assert(condition, name) {
 }
 
 const headed = process.argv.includes('--headed');
-const executablePath = process.env.PLAYWRIGHT_EXECUTABLE_PATH;
+const fallbackChrome = '/home/ubuntu-24/.cache/ms-playwright/chromium-1243/chrome-linux64/chrome';
+const executablePath = process.env.PLAYWRIGHT_EXECUTABLE_PATH
+    || (existsSync(fallbackChrome) ? fallbackChrome : undefined);
 const browser = await chromium.launch({
     headless: !headed,
     executablePath,
@@ -143,15 +147,16 @@ assert(hasScrolledClass, 'Header gets scrolled state on scroll');
 console.log('\n🎯 Hero');
 await desktop.evaluate(() => window.scrollTo(0, 0));
 await desktop.waitForTimeout(300);
-assert(await desktop.locator('.hero-badge').isVisible(), 'Hero badge visible');
 assert(await desktop.locator('.hero-title').isVisible(), 'Hero title visible');
-assert(await desktop.locator('.code-window').isVisible(), 'Code window visible');
+assert(await desktop.locator('.hero-proof-bar').isVisible(), 'Hero practitioner proof bar visible');
+assert(await desktop.locator('.telemetry-panel').isVisible(), 'Architecture telemetry panel visible');
+assert(await desktop.locator('.telemetry-row').count() === 4, '4 architecture telemetry domains present');
 assert(await desktop.locator('.hero-actions .btn-primary').isVisible(), 'Primary CTA visible');
 assert(await desktop.locator('.hero-actions .btn-ghost').isVisible(), 'Secondary CTA visible');
 
-const gradientText = desktop.locator('.gradient-text').first();
-const bgClip = await gradientText.evaluate(el => getComputedStyle(el).webkitBackgroundClip);
-assert(bgClip === 'text', 'Gradient text effect applied');
+const heroAccent = desktop.locator('.hero-accent').first();
+const accentColor = await heroAccent.evaluate(el => getComputedStyle(el).color);
+assert(accentColor !== 'rgb(248, 250, 252)', `Hero accent text has distinct emphasis color (${accentColor})`);
 
 // Services section
 console.log('\n💼 Services');
@@ -195,7 +200,9 @@ assert(productCardBox.height < 400, `Product card height stays under 400px on de
 assert(await productCard.locator('.product-card-media img').isVisible(), 'Product thumbnail is visible');
 assert(await productCard.locator('.project-tag').count() >= 1, 'Product tags present');
 assert(await productCard.locator('.product-links .btn').count() === 2, '2 product links (site + repo) present');
-assert(await desktop.locator('.product-card--lab').isVisible(), 'Open source and experiments card present');
+assert(await desktop.locator('.product-card--lab').count() === 2, '2 open source and experiments cards present (Débora Whisper + Audio Blackbox)');
+assert(await desktop.locator('.pub-card').count() === 3, '3 technical publications present');
+assert(await desktop.locator('.pub-profile-link').count() === 3, '3 publication profile links (Medium, dev.to, LinkedIn) present');
 
 // Contact section
 console.log('\n📞 Contact');
@@ -216,6 +223,17 @@ assert(await desktop.locator('.footer').isVisible(), 'Footer visible');
 assert(await desktop.locator('.footer-brand').isVisible(), 'Footer brand visible');
 assert(await desktop.locator('.footer-nav').isVisible(), 'Footer nav visible');
 
+await mkdir(join(ROOT, '.impeccable', 'review'), { recursive: true });
+await desktop.evaluate(async () => {
+    document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
+    for (const img of document.querySelectorAll('img[loading="lazy"]')) {
+        img.loading = 'eager';
+        await img.decode().catch(() => {});
+    }
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+});
+await desktop.waitForTimeout(200);
+await desktop.screenshot({ path: join(ROOT, '.impeccable', 'review', 'desktop.png'), fullPage: true });
 await desktop.screenshot({ path: '/tmp/pw-desktop.png', fullPage: true });
 await desktop.close();
 
@@ -246,8 +264,9 @@ const brandDeltaMobile = Math.abs(
 );
 assert(brandDeltaMobile <= 1.5, `Logo & "NexaDuo" text share vertical center on mobile (Δ=${brandDeltaMobile.toFixed(2)}px)`);
 
-// Code window hidden on mobile
-assert(await mobile.locator('.hero-visual').isHidden(), 'Code window hidden on mobile');
+// Architecture telemetry panel stays visible and fits on mobile
+const mobileTelemetryBox = await mobile.locator('.telemetry-panel').boundingBox();
+assert(mobileTelemetryBox && mobileTelemetryBox.width <= 390, `Telemetry panel fits mobile viewport (${Math.round(mobileTelemetryBox?.width)}px)`);
 
 // Open mobile menu
 console.log('\n🍔 Mobile Menu');
@@ -320,12 +339,22 @@ assert(bodyOverflow2 !== 'hidden', 'Body scroll unlocked when menu closed');
 // Products stay legible on mobile (no horizontal overflow, stacked layout)
 await mobile.locator('#products').scrollIntoViewIfNeeded();
 await mobile.waitForTimeout(300);
-for (const sel of ['.product-featured', '.product-card']) {
+for (const sel of ['.product-featured', '.product-card', '.pub-card']) {
     const box = await mobile.locator(sel).first().boundingBox();
     assert(box.width <= 390, `${sel} does not overflow mobile viewport (${Math.round(box.width)}px)`);
 }
 assert(await mobile.locator('.product-featured .product-links .btn').count() === 2, '2 Vaelo links present on mobile');
 
+await mobile.evaluate(async () => {
+    document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
+    for (const img of document.querySelectorAll('img[loading="lazy"]')) {
+        img.loading = 'eager';
+        await img.decode().catch(() => {});
+    }
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+});
+await mobile.waitForTimeout(200);
+await mobile.screenshot({ path: join(ROOT, '.impeccable', 'review', 'mobile.png'), fullPage: true });
 await mobile.screenshot({ path: '/tmp/pw-mobile.png' });
 await mobile.close();
 
