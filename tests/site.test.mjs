@@ -189,7 +189,8 @@ const featured = desktop.locator('.product-featured');
 assert(await featured.isVisible(), 'Featured product (Vaelo) is visible');
 assert(await featured.locator('.product-featured-screen').isVisible(), 'Vaelo app screenshot is visible');
 assert((await featured.locator('.product-name').textContent()).includes('Vaelo'), 'Featured product is Vaelo');
-assert(await featured.locator('.product-links .btn').count() === 2, '2 Vaelo links (app + site) present');
+assert((await featured.locator('a[href*="play.google.com/store/apps/details?id=club.vaelo.android"]').count()) === 1, 'Vaelo Google Play link present');
+assert(await featured.locator('.product-links .btn').count() === 3, '3 Vaelo links (app + Play + site) present');
 const featuredBox = await featured.boundingBox();
 assert(featuredBox.height < 640, `Featured product stays compact on desktop (${Math.round(featuredBox.height)}px)`);
 // Regression for #16: the secondary card must stay a compact horizontal row.
@@ -343,7 +344,7 @@ for (const sel of ['.product-featured', '.product-card', '.pub-card']) {
     const box = await mobile.locator(sel).first().boundingBox();
     assert(box.width <= 390, `${sel} does not overflow mobile viewport (${Math.round(box.width)}px)`);
 }
-assert(await mobile.locator('.product-featured .product-links .btn').count() === 2, '2 Vaelo links present on mobile');
+assert(await mobile.locator('.product-featured .product-links .btn').count() === 3, '3 Vaelo links present on mobile');
 
 await mobile.evaluate(async () => {
     document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
