@@ -99,7 +99,7 @@
             // Home - products
             'products.title': 'Produtos',
             'products.desc': 'Software que construímos, mantemos e usamos no dia a dia.',
-            'product.vaelo.status': 'Disponível na web · Android e iPhone em breve',
+            'product.vaelo.status': 'Na web e no Android · iPhone em breve',
             'product.vaelo.pitch': 'Despesas em grupo, sem entregar seus dados.',
             'product.vaelo.desc': 'O app para dividir as contas da viagem, da casa ou dos amigos. Os lançamentos ficam nos aparelhos e só viajam cifrados de ponta a ponta.',
             'product.vaelo.point1': 'Cifrado de ponta a ponta: o servidor só repassa dados que não consegue ler',
@@ -107,6 +107,7 @@
             'product.vaelo.point3': 'Partes iguais, valores exatos, porcentagem ou cotas, com correção pelo IPCA',
             'product.vaelo.open': 'Usar no navegador',
             'product.vaelo.screen_alt': 'Tela do Vaelo: grupo Viagem para Paraty com saldo a receber e botões de despesa, acerto e convite',
+            'product.vaelo.play': 'Baixar no Google Play',
             'product.vaelo.site': 'Conhecer o Vaelo',
             'lab.title': 'Open source e experimentos',
             'project.marc.title': 'mARC (Multi-Agent Relay Control)',
@@ -278,7 +279,7 @@
             // Home - products
             'products.title': 'Products',
             'products.desc': 'Software we build, maintain, and use every day.',
-            'product.vaelo.status': 'Available on the web · Android and iPhone soon',
+            'product.vaelo.status': 'On the web and Android · iPhone soon',
             'product.vaelo.pitch': 'Group expenses, without giving away your data.',
             'product.vaelo.desc': 'The app for splitting the bills of a trip, a shared home, or a night out. Entries live on your devices and only travel end-to-end encrypted.',
             'product.vaelo.point1': 'End-to-end encrypted: the server only relays data it cannot read',
@@ -286,6 +287,7 @@
             'product.vaelo.point3': 'Equal splits, exact amounts, percentages, or shares, with Brazilian IPCA inflation correction',
             'product.vaelo.open': 'Open in the browser',
             'product.vaelo.screen_alt': 'Vaelo screen: a trip group with the amount you receive and buttons to add an expense, settle up, and invite',
+            'product.vaelo.play': 'Get it on Google Play',
             'product.vaelo.site': 'Discover Vaelo',
             'lab.title': 'Open source and experiments',
             'project.marc.title': 'mARC (Multi-Agent Relay Control)',
